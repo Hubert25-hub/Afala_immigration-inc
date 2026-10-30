@@ -97,7 +97,7 @@
 </header>
 
 <div class="demo-note" id="demoNote">
-  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : identifiant <b>afala</b>, mot de passe <b>suivi2026</b>, à remplacer par les accès personnels du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
+  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : identifiant <b>Afala</b>, mot de passe <b>Immigration2026</b>, à remplacer par les accès personnels du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
 </div>
 
 <section id="loginBox" style="max-width:430px;margin:26px auto 0;padding:0 20px">
@@ -193,8 +193,8 @@ const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis
 const STATUTS = ["Nouveau contact","Consultation faite","Dossier en préparation","Soumis","Décision reçue","Refus à retravailler"];
 const DOCS = [["passeport","Passeport"],["diplomes","Diplômes et relevés"],["experience","Preuves d'expérience"],["fonds","Preuves de fonds"],["langue","Test de langue"]];
 const CLE = "afala-suivi-v1";
-function demoId(){ return sessionStorage.getItem("afala-demo-id") || "afala"; }
-function demoPass(){ return sessionStorage.getItem("afala-demo-pass") || "suivi2026"; }
+function demoId(){ return sessionStorage.getItem("afala-demo-id") || "Afala"; }
+function demoPass(){ return sessionStorage.getItem("afala-demo-pass") || "Immigration2026"; }
 window._auth = null;
 
 const $ = (s) => document.querySelector(s);
