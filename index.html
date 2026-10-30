@@ -52,7 +52,17 @@ nav.main a:hover{color:var(--red)}
 .btn-sm{padding:10px 18px;font-size:14px}
 .btn-wa-outline{border-color:#BFE9CF;color:var(--ink);background:#fff}
 .btn-wa-outline:hover{border-color:var(--wa-dark);color:var(--wa-dark)}
-@media(max-width:860px){nav.main{display:none}}
+.burger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:#fff;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;padding:0}
+@media(max-width:860px){nav.main{display:none}.burger{display:inline-flex}}
+.burger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;border-top:1px solid var(--line);background:#fff}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:15px 0;font-weight:700;font-size:16px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:active,.mobile-menu a:hover{color:var(--red)}
 
 /* ---------- hero ---------- */
 .hero{padding:52px 0 0;overflow:hidden}
@@ -246,8 +256,34 @@ footer a:hover{color:#fff}
       <a href="#contact">Contact</a>
     </nav>
     <a class="btn btn-red btn-sm" href="#test">Test gratuit</a>
+    <button class="burger" id="menuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="wrap">
+      <a href="#accueil">Accueil</a>
+      <a href="#apropos">À propos</a>
+      <a href="#services">Services</a>
+      <a href="#processus">Processus</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 </header>
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'), menu=document.getElementById('mobileMenu');
+  if(!btn||!menu) return;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-label','Ouvrir le menu'); }
+  btn.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+  });
+  menu.addEventListener('click',function(e){ if(e.target.closest('a')) close(); });
+  window.addEventListener('resize',function(){ if(window.innerWidth>860) close(); });
+})();
+</script>
 
 <main id="accueil">
 
