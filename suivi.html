@@ -89,10 +89,23 @@
 </header>
 
 <div class="demo-note" id="demoNote">
-  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
+  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : identifiant <b>afala</b>, mot de passe <b>suivi2026</b>, à remplacer par les accès personnels du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
 </div>
 
-<main>
+<section id="loginBox" style="max-width:430px;margin:26px auto 0;padding:0 20px">
+  <form class="fiche" id="loginForm" style="background:#fff;border:1px solid var(--line);border-radius:14px">
+    <h2>Espace du consultant</h2>
+    <p class="sub">Connecte toi pour ouvrir le suivi des dossiers du cabinet.</p>
+    <div style="margin-bottom:12px"><label class="fl" for="l_id">Identifiant</label><input id="l_id" required autocomplete="username"></div>
+    <div><label class="fl" for="l_pass">Mot de passe</label><input id="l_pass" type="password" required autocomplete="current-password"></div>
+    <p id="l_err" style="color:var(--red);font-size:13px;min-height:16px;margin-top:8px"></p>
+    <div class="form-actions" style="justify-content:stretch">
+      <button class="btn btn-red" type="submit" style="flex:1">Se connecter</button>
+    </div>
+  </form>
+</section>
+
+<main id="app" style="display:none">
   <section class="stats" id="stats"></section>
 
   <div class="toolbar">
@@ -144,6 +157,8 @@ const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis
 const STATUTS = ["Nouveau contact","Consultation faite","Dossier en préparation","Soumis","Décision reçue","Refus à retravailler"];
 const DOCS = [["passeport","Passeport"],["diplomes","Diplômes et relevés"],["experience","Preuves d'expérience"],["fonds","Preuves de fonds"],["langue","Test de langue"]];
 const CLE = "afala-suivi-v1";
+const DEMO_ID = "afala", DEMO_PASS = "suivi2026";
+window._auth = null;
 
 const $ = (s) => document.querySelector(s);
 let fiches = [];
@@ -166,7 +181,8 @@ function chargerLocal(){
 }
 
 async function chargerDistant(){
-  const r = await fetch(APPS_SCRIPT_URL);
+  const p = new URLSearchParams({ identifiant: (window._auth || {}).id || "", motdepasse: (window._auth || {}).pass || "" });
+  const r = await fetch(APPS_SCRIPT_URL + "?" + p.toString());
   const j = await r.json();
   if (!j.ok) throw new Error(j.erreur || "Erreur de lecture");
   fiches = j.dossiers.map(d => ({
@@ -186,7 +202,8 @@ async function envoyerDistant(action, fiche){
     Pays: fiche.pays, Programme: fiche.programme, Statut: fiche.statut,
     Passeport: !!fiche.docs.passeport, "Diplômes": !!fiche.docs.diplomes, "Expérience": !!fiche.docs.experience,
     Fonds: !!fiche.docs.fonds, Langue: !!fiche.docs.langue, Relance: fiche.relance, Notes: fiche.notes } : null;
-  const corps = action === "supprimer" ? { action, id: fiche } : { action, dossier };
+  const auth = { identifiant: (window._auth || {}).id || "", motdepasse: (window._auth || {}).pass || "" };
+  const corps = action === "supprimer" ? { action, id: fiche, ...auth } : { action, dossier, ...auth };
   const r = await fetch(APPS_SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain" }, body: JSON.stringify(corps) });
   const j = await r.json();
   if (!j.ok) throw new Error(j.erreur || "Erreur d'enregistrement");
@@ -322,8 +339,13 @@ function initialiser(){
   });
 }
 
-(async function demarrer(){
-  initialiser();
+function entrer(){
+  $("#loginBox").style.display = "none";
+  $("#app").style.display = "";
+  chargerEtAfficher();
+}
+
+async function chargerEtAfficher(){
   if (APPS_SCRIPT_URL) {
     $("#demoNote").style.display = "none";
     try { await chargerDistant(); } catch(err){ chargerLocal(); }
@@ -331,6 +353,37 @@ function initialiser(){
     chargerLocal();
   }
   afficher();
+}
+
+async function connecter(e){
+  e.preventDefault();
+  const id = $("#l_id").value.trim(), pass = $("#l_pass").value;
+  if (APPS_SCRIPT_URL) {
+    window._auth = { id, pass };
+    try { await chargerDistant(); }
+    catch(err){ $("#l_err").textContent = "Identifiant ou mot de passe incorrect, ou connexion impossible."; return; }
+    sessionStorage.setItem("afala-id", id);
+    sessionStorage.setItem("afala-pass", pass);
+  } else {
+    if (id !== DEMO_ID || pass !== DEMO_PASS) {
+      $("#l_err").textContent = "Identifiant ou mot de passe incorrect.";
+      return;
+    }
+    sessionStorage.setItem("afala-auth", "1");
+  }
+  $("#l_err").textContent = "";
+  entrer();
+}
+
+(function demarrer(){
+  initialiser();
+  $("#loginForm").addEventListener("submit", connecter);
+  if (APPS_SCRIPT_URL) {
+    const id = sessionStorage.getItem("afala-id"), pass = sessionStorage.getItem("afala-pass");
+    if (id && pass) { window._auth = { id, pass }; entrer(); }
+  } else if (sessionStorage.getItem("afala-auth") === "1") {
+    entrer();
+  }
 })();
 </script>
 </body>
