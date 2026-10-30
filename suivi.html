@@ -193,7 +193,8 @@ const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis
 const STATUTS = ["Nouveau contact","Consultation faite","Dossier en préparation","Soumis","Décision reçue","Refus à retravailler"];
 const DOCS = [["passeport","Passeport"],["diplomes","Diplômes et relevés"],["experience","Preuves d'expérience"],["fonds","Preuves de fonds"],["langue","Test de langue"]];
 const CLE = "afala-suivi-v1";
-const DEMO_ID = "afala", DEMO_PASS = "suivi2026";
+function demoId(){ return sessionStorage.getItem("afala-demo-id") || "afala"; }
+function demoPass(){ return sessionStorage.getItem("afala-demo-pass") || "suivi2026"; }
 window._auth = null;
 
 const $ = (s) => document.querySelector(s);
@@ -413,6 +414,7 @@ function exporterPDF(id){
 function entrer(){
   $("#loginBox").style.display = "none";
   $("#app").style.display = "";
+  $("#btnAcces").style.display = "";
   chargerEtAfficher();
 }
 
@@ -430,7 +432,16 @@ async function chargerEtAfficher(){
 async function changerAcces(e){
   e.preventDefault();
   const nid = $("#a_id").value.trim(), npass = $("#a_pass").value;
-  if (!nid || !npass || !window._auth) return;
+  if (!nid || !npass) return;
+  if (!APPS_SCRIPT_URL) {
+    sessionStorage.setItem("afala-demo-id", nid);
+    sessionStorage.setItem("afala-demo-pass", npass);
+    window._auth = { id: nid, pass: npass };
+    $("#dlgAcces").close();
+    alert("Tes accès de démonstration sont à jour pour cette session. À l'installation, ils seront enregistrés dans le tableau du cabinet.");
+    return;
+  }
+  if (!window._auth) return;
   try {
     const r = await fetch(APPS_SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain" },
       body: JSON.stringify({ action:"changerAcces", identifiant: window._auth.id, motdepasse: window._auth.pass,
@@ -457,10 +468,11 @@ async function connecter(e){
     sessionStorage.setItem("afala-id", id);
     sessionStorage.setItem("afala-pass", pass);
   } else {
-    if (id !== DEMO_ID || pass !== DEMO_PASS) {
+    if (id !== demoId() || pass !== demoPass()) {
       $("#l_err").textContent = "Identifiant ou mot de passe incorrect.";
       return;
     }
+    window._auth = { id, pass };
     sessionStorage.setItem("afala-auth", "1");
   }
   $("#l_err").textContent = "";
