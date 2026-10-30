@@ -129,6 +129,18 @@
 
 <div id="printSheet"></div>
 
+<dialog id="dlgPdf">
+  <div style="padding:22px">
+    <h2 style="font-size:20px;font-weight:900;margin-bottom:4px">Fiche client</h2>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:14px">Aperçu du document. Clique Imprimer, puis choisis Enregistrer au format PDF comme destination pour obtenir le fichier.</p>
+    <div id="pdfPreview" style="border:1px solid var(--line);border-radius:10px;padding:16px;max-height:55vh;overflow:auto"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-ghost" type="button" id="btnClosePdf">Fermer</button>
+      <button class="btn btn-red" type="button" id="btnPrintPdf">Imprimer ou enregistrer en PDF</button>
+    </div>
+  </div>
+</dialog>
+
 <dialog id="dlg">
   <form class="fiche" id="form" method="dialog">
     <h2 id="formTitle">Nouvelle fiche</h2>
@@ -365,11 +377,11 @@ function initialiser(){
 function exporterPDF(id){
   const f = fiches.find(x => x.id === id);
   if (!f) return;
-  const recus = DOCS.filter(d => f.docs.includes(d));
+  const recus = DOCS.filter(([k]) => f.docs && f.docs[k]);
   const ligne = (k, v) => `<tr><td style="padding:7px 10px;border:1px solid #ddd;font-weight:700;width:190px;background:#fafafa">${k}</td><td style="padding:7px 10px;border:1px solid #ddd">${esc(v || "·")}</td></tr>`;
-  const docLigne = d => `<tr><td style="padding:7px 10px;border:1px solid #ddd">${d}</td><td style="padding:7px 10px;border:1px solid #ddd">${f.docs.includes(d) ? "Reçu" : "En attente"}</td></tr>`;
+  const docLigne = ([k, lib]) => `<tr><td style="padding:7px 10px;border:1px solid #ddd">${lib}</td><td style="padding:7px 10px;border:1px solid #ddd">${f.docs && f.docs[k] ? "Reçu" : "En attente"}</td></tr>`;
   const dateExport = new Date().toLocaleDateString("fr-CA");
-  $("#printSheet").innerHTML = `
+  const html = `
     <div style="font-family:Arial,sans-serif;color:#14181d;max-width:720px;margin:0 auto">
       <div style="border-bottom:3px solid #E11B22;padding-bottom:12px;margin-bottom:18px">
         <div style="font-size:22px;font-weight:900">AFALA <span style="color:#E11B22">IMMIGRATION INC</span></div>
@@ -388,7 +400,9 @@ function exporterPDF(id){
       <p style="font-size:14px;white-space:pre-wrap;border:1px solid #ddd;border-radius:8px;padding:10px 12px">${esc(f.notes || "Aucune note.")}</p>
       <p style="font-size:11px;color:#888;margin-top:16px">Document interne du cabinet. Les pièces du client sont conservées dans le courriel du cabinet, cet export sert au suivi.</p>
     </div>`;
-  window.print();
+  $("#printSheet").innerHTML = html;
+  $("#pdfPreview").innerHTML = html;
+  $("#dlgPdf").showModal();
 }
 
 function entrer(){
@@ -454,6 +468,8 @@ async function connecter(e){
   $("#btnAcces").addEventListener("click", () => { $("#a_id").value = (window._auth || {}).id || ""; $("#a_pass").value = ""; $("#dlgAcces").showModal(); });
   $("#btnCancelAcces").addEventListener("click", () => $("#dlgAcces").close());
   $("#formAcces").addEventListener("submit", changerAcces);
+  $("#btnClosePdf").addEventListener("click", () => $("#dlgPdf").close());
+  $("#btnPrintPdf").addEventListener("click", () => { $("#dlgPdf").close(); setTimeout(() => window.print(), 80); });
   if (APPS_SCRIPT_URL) {
     const id = sessionStorage.getItem("afala-id"), pass = sessionStorage.getItem("afala-pass");
     if (id && pass) { window._auth = { id, pass }; entrer(); }
