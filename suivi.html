@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suivi des dossiers · AFALA IMMIGRATION INC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E11B22; --red-dark:#B30F18; --ink:#14181D; --gray:#5B6670;
+    --line:#E4E7EA; --bg:#F6F7F8; --card:#FFFFFF; --amber:#B7791F; --amber-bg:#FFF6E0;
+    --green:#1E7D46; --green-bg:#E7F5EC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Archivo',system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  a{color:inherit}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .head-in{max-width:1080px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .badge{width:44px;height:44px;background:var(--red);color:#fff;font-weight:900;font-size:22px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex:0 0 auto}
+  .brand{line-height:1.1}
+  .brand b{font-size:19px;font-weight:900;letter-spacing:.4px}
+  .brand span{display:block;font-size:11px;letter-spacing:2.5px;color:var(--gray);font-weight:700}
+  .head-title{margin-left:auto;text-align:right}
+  .head-title b{font-size:16px;font-weight:800}
+  .head-title span{display:block;font-size:12px;color:var(--gray)}
+  .demo-note{max-width:1080px;margin:14px auto 0;padding:0 20px}
+  .demo-note p{background:var(--amber-bg);border:1px solid #EBD9A0;color:#6B5410;font-size:13px;padding:10px 14px;border-radius:8px}
+  main{max-width:1080px;margin:0 auto;padding:18px 20px 60px}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0 20px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .stat b{display:block;font-size:28px;font-weight:900}
+  .stat span{font-size:12px;color:var(--gray);font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+  .stat.alert b{color:var(--red)}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+  .toolbar input[type=search],.toolbar select{padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:#fff}
+  .toolbar input[type=search]{flex:1 1 200px}
+  .btn{border:0;border-radius:999px;padding:12px 20px;font:inherit;font-weight:800;font-size:14px;cursor:pointer}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-red:hover{background:var(--red-dark)}
+  .btn-ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn-small{padding:8px 14px;font-size:13px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .card.due{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset}
+  .card-top{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .card h3{font-size:18px;font-weight:900}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .chip{font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--gray)}
+  .chip.statut{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .chip.due-chip{background:var(--red);color:#fff;border-color:var(--red)}
+  .meta{margin-top:8px;font-size:14px;color:var(--gray);display:flex;gap:16px;flex-wrap:wrap}
+  .meta b{color:var(--ink);font-weight:700}
+  .docs{margin-top:10px;font-size:13px;color:var(--gray)}
+  .docs .bar{height:6px;background:var(--bg);border-radius:99px;margin-top:5px;overflow:hidden}
+  .docs .bar i{display:block;height:100%;background:var(--green)}
+  .notes{margin-top:10px;font-size:14px;background:var(--bg);border-radius:8px;padding:10px 12px}
+  .card-actions{margin-top:12px;display:flex;gap:8px}
+  .empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:34px 20px;text-align:center;color:var(--gray)}
+  dialog{border:0;border-radius:14px;padding:0;max-width:560px;width:calc(100% - 32px)}
+  dialog::backdrop{background:rgba(20,24,29,.45)}
+  form.fiche{padding:22px}
+  form.fiche h2{font-size:20px;font-weight:900;margin-bottom:4px}
+  form.fiche p.sub{font-size:13px;color:var(--gray);margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid .full{grid-column:1 / -1}
+  label.fl{display:block;font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gray);margin-bottom:5px}
+  form.fiche input,form.fiche select,form.fiche textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:#fff}
+  fieldset{border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+  legend{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--gray);padding:0 6px}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:14px}
+  .checks label{display:flex;gap:8px;align-items:center;font-weight:600}
+  .form-actions{display:flex;gap:10px;margin-top:18px;justify-content:flex-end}
+  footer{max-width:1080px;margin:0 auto;padding:0 20px 34px;color:var(--gray);font-size:12px}
+  @media (max-width:760px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:1fr}
+    .head-title{display:none}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="head-in">
+    <div class="badge">A</div>
+    <div class="brand"><b>AFALA</b><span>· IMMIGRATION INC ·</span></div>
+    <div class="head-title"><b>Suivi des dossiers</b><span>Espace du consultant, accès privé</span></div>
+  </div>
+</header>
+
+<div class="demo-note" id="demoNote">
+  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
+</div>
+
+<main>
+  <section class="stats" id="stats"></section>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Rechercher un client par son nom">
+    <select id="fStatut"><option value="">Tous les statuts</option></select>
+    <select id="fProgramme"><option value="">Tous les programmes</option></select>
+    <button class="btn btn-ghost btn-small" id="btnDue" type="button">À relancer</button>
+    <button class="btn btn-red" id="btnNew" type="button">+ Nouvelle fiche</button>
+  </div>
+
+  <section id="list"></section>
+</main>
+
+<footer>AFALA IMMIGRATION INC · Suivi interne des dossiers · Les documents des clients sont reçus par courriel, cet outil sert uniquement au suivi.</footer>
+
+<dialog id="dlg">
+  <form class="fiche" id="form" method="dialog">
+    <h2 id="formTitle">Nouvelle fiche</h2>
+    <p class="sub">Les documents du client arrivent par courriel, coche ici ce qui a été reçu.</p>
+    <input type="hidden" id="f_id">
+    <div class="grid">
+      <div class="full"><label class="fl" for="f_nom">Nom complet</label><input id="f_nom" required></div>
+      <div><label class="fl" for="f_whatsapp">Téléphone ou WhatsApp</label><input id="f_whatsapp"></div>
+      <div><label class="fl" for="f_courriel">Courriel</label><input id="f_courriel" type="email"></div>
+      <div><label class="fl" for="f_pays">Pays de résidence</label><input id="f_pays"></div>
+      <div><label class="fl" for="f_programme">Programme visé</label><select id="f_programme"></select></div>
+      <div><label class="fl" for="f_statut">Statut du dossier</label><select id="f_statut"></select></div>
+      <div><label class="fl" for="f_relance">Prochaine relance</label><input id="f_relance" type="date"></div>
+    </div>
+    <fieldset>
+      <legend>Documents reçus par courriel</legend>
+      <div class="checks" id="f_docs"></div>
+    </fieldset>
+    <div style="margin-top:12px"><label class="fl" for="f_notes">Notes</label><textarea id="f_notes" rows="3"></textarea></div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" type="button" id="btnCancel">Annuler</button>
+      <button class="btn btn-red" type="submit">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+// Configuration : laisser vide pour le mode démo (données sur cet appareil).
+// Le jour de l'installation, inscrire ici l'adresse de l'application Web
+// Apps Script du Google Sheet du cabinet, produite par le guide d'installation.
+const APPS_SCRIPT_URL = "";
+
+const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis de travail","Parrainage familial","Résidence permanente","Citoyenneté","Autre"];
+const STATUTS = ["Nouveau contact","Consultation faite","Dossier en préparation","Soumis","Décision reçue","Refus à retravailler"];
+const DOCS = [["passeport","Passeport"],["diplomes","Diplômes et relevés"],["experience","Preuves d'expérience"],["fonds","Preuves de fonds"],["langue","Test de langue"]];
+const CLE = "afala-suivi-v1";
+
+const $ = (s) => document.querySelector(s);
+let fiches = [];
+let filtreDue = false;
+
+function aujourdHui(){ return new Date().toISOString().slice(0,10); }
+function estDue(f){ return f.relance && f.relance <= aujourdHui() && f.statut !== "Décision reçue"; }
+function nbDocs(f){ return DOCS.filter(([k]) => f.docs && f.docs[k]).length; }
+
+function sauverLocal(){ localStorage.setItem(CLE, JSON.stringify(fiches)); }
+function chargerLocal(){
+  try { fiches = JSON.parse(localStorage.getItem(CLE)) || null; } catch(e){ fiches = null; }
+  if (!fiches) {
+    fiches = [{ id:"exemple-1", nom:"Exemple · Awa Ndiaye", whatsapp:"+XXX XX XX XX XX", courriel:"exemple@courriel.com",
+      pays:"Sénégal", programme:"Permis d'études", statut:"Dossier en préparation",
+      docs:{passeport:true, diplomes:true, experience:false, fonds:false, langue:false},
+      relance: aujourdHui(), notes:"Relancer pour les preuves de fonds.", maj: aujourdHui() }];
+    sauverLocal();
+  }
+}
+
+async function chargerDistant(){
+  const r = await fetch(APPS_SCRIPT_URL);
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.erreur || "Erreur de lecture");
+  fiches = j.dossiers.map(d => ({
+    id: d.ID, nom: d.Nom || "", whatsapp: d.WhatsApp || "", courriel: d.Courriel || "", pays: d.Pays || "",
+    programme: d.Programme || "", statut: d.Statut || "",
+    docs:{ passeport: d.Passeport === true || d.Passeport === "TRUE",
+           diplomes: d["Diplômes"] === true || d["Diplômes"] === "TRUE",
+           experience: d["Expérience"] === true || d["Expérience"] === "TRUE",
+           fonds: d.Fonds === true || d.Fonds === "TRUE",
+           langue: d.Langue === true || d.Langue === "TRUE" },
+    relance: d.Relance || "", notes: d.Notes || "", maj: d["Mise à jour"] || ""
+  }));
+}
+
+async function envoyerDistant(action, fiche){
+  const dossier = fiche ? { ID: fiche.id, Nom: fiche.nom, WhatsApp: fiche.whatsapp, Courriel: fiche.courriel,
+    Pays: fiche.pays, Programme: fiche.programme, Statut: fiche.statut,
+    Passeport: !!fiche.docs.passeport, "Diplômes": !!fiche.docs.diplomes, "Expérience": !!fiche.docs.experience,
+    Fonds: !!fiche.docs.fonds, Langue: !!fiche.docs.langue, Relance: fiche.relance, Notes: fiche.notes } : null;
+  const corps = action === "supprimer" ? { action, id: fiche } : { action, dossier };
+  const r = await fetch(APPS_SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain" }, body: JSON.stringify(corps) });
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.erreur || "Erreur d'enregistrement");
+}
+
+function optionsListe(select, valeurs){
+  valeurs.forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = v; select.appendChild(o); });
+}
+
+function afficherStats(){
+  const total = fiches.length;
+  const enCours = fiches.filter(f => f.statut !== "Décision reçue").length;
+  const soumis = fiches.filter(f => f.statut === "Soumis").length;
+  const decisions = fiches.filter(f => f.statut === "Décision reçue").length;
+  const dues = fiches.filter(estDue).length;
+  $("#stats").innerHTML =
+    `<div class="stat"><b>${total}</b><span>Dossiers au total</span></div>
+     <div class="stat"><b>${enCours}</b><span>En cours</span></div>
+     <div class="stat"><b>${soumis}</b><span>Soumis</span></div>
+     <div class="stat"><b>${decisions}</b><span>Décisions reçues</span></div>
+     <div class="stat alert"><b>${dues}</b><span>Relances dues</span></div>`;
+}
+
+function afficher(){
+  afficherStats();
+  const q = $("#q").value.trim().toLowerCase();
+  const fs = $("#fStatut").value, fp = $("#fProgramme").value;
+  const liste = fiches
+    .filter(f => (!q || f.nom.toLowerCase().includes(q)) && (!fs || f.statut === fs) && (!fp || f.programme === fp) && (!filtreDue || estDue(f)))
+    .sort((a,b) => (estDue(b) - estDue(a)) || String(b.maj || "").localeCompare(String(a.maj || "")));
+  if (!liste.length){
+    $("#list").innerHTML = `<div class="empty"><b>Aucune fiche à afficher.</b><br>Crée la première fiche du cabinet avec le bouton Nouvelle fiche.</div>`;
+    return;
+  }
+  $("#list").innerHTML = liste.map(f => {
+    const n = nbDocs(f);
+    const due = estDue(f);
+    return `<article class="card ${due ? "due" : ""}">
+      <div class="card-top">
+        <h3>${f.nom}</h3>
+        <div class="chips">
+          ${due ? `<span class="chip due-chip">Relance due</span>` : ""}
+          <span class="chip statut">${f.statut}</span>
+          <span class="chip">${f.programme}</span>
+        </div>
+      </div>
+      <div class="meta">
+        <span>WhatsApp : <b>${f.whatsapp || "à compléter"}</b></span>
+        <span>Courriel : <b>${f.courriel || "à compléter"}</b></span>
+        <span>Pays : <b>${f.pays || "à compléter"}</b></span>
+        <span>Relance : <b>${f.relance || "aucune date"}</b></span>
+      </div>
+      <div class="docs">Documents reçus par courriel : ${n} sur ${DOCS.length}
+        <div class="bar"><i style="width:${(n / DOCS.length) * 100}%"></i></div>
+      </div>
+      ${f.notes ? `<p class="notes">${f.notes}</p>` : ""}
+      <div class="card-actions">
+        <button class="btn btn-ghost btn-small" data-act="edit" data-id="${f.id}" type="button">Modifier</button>
+        <button class="btn btn-ghost btn-small" data-act="del" data-id="${f.id}" type="button">Supprimer</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function ouvrirForme(f){
+  $("#formTitle").textContent = f ? "Modifier la fiche" : "Nouvelle fiche";
+  $("#f_id").value = f ? f.id : "";
+  $("#f_nom").value = f ? f.nom : "";
+  $("#f_whatsapp").value = f ? f.whatsapp : "";
+  $("#f_courriel").value = f ? f.courriel : "";
+  $("#f_pays").value = f ? f.pays : "";
+  $("#f_programme").value = f ? f.programme : PROGRAMMES[0];
+  $("#f_statut").value = f ? f.statut : STATUTS[0];
+  $("#f_relance").value = f ? f.relance : "";
+  $("#f_notes").value = f ? f.notes : "";
+  DOCS.forEach(([k]) => { document.querySelector(`#doc_${k}`).checked = f ? !!f.docs[k] : false; });
+  $("#dlg").showModal();
+}
+
+async function enregistrer(e){
+  e.preventDefault();
+  const id = $("#f_id").value || ("f" + Date.now().toString(36));
+  const fiche = { id,
+    nom: $("#f_nom").value.trim(), whatsapp: $("#f_whatsapp").value.trim(), courriel: $("#f_courriel").value.trim(),
+    pays: $("#f_pays").value.trim(), programme: $("#f_programme").value, statut: $("#f_statut").value,
+    relance: $("#f_relance").value, notes: $("#f_notes").value.trim(), maj: aujourdHui(),
+    docs: Object.fromEntries(DOCS.map(([k]) => [k, document.querySelector(`#doc_${k}`).checked])) };
+  if (!fiche.nom) return;
+  const idx = fiches.findIndex(f => f.id === id);
+  if (APPS_SCRIPT_URL) {
+    try { await envoyerDistant(idx >= 0 ? "modifier" : "ajouter", fiche); await chargerDistant(); }
+    catch(err){ alert("Enregistrement impossible pour le moment, vérifie la connexion puis réessaie."); return; }
+  } else {
+    if (idx >= 0) fiches[idx] = fiche; else fiches.unshift(fiche);
+    sauverLocal();
+  }
+  $("#dlg").close();
+  afficher();
+}
+
+async function supprimer(id){
+  const f = fiches.find(x => x.id === id);
+  if (!f || !confirm(`Supprimer la fiche de ${f.nom} ?`)) return;
+  if (APPS_SCRIPT_URL) {
+    try { await envoyerDistant("supprimer", id); await chargerDistant(); }
+    catch(err){ alert("Suppression impossible pour le moment, vérifie la connexion puis réessaie."); return; }
+  } else {
+    fiches = fiches.filter(x => x.id !== id);
+    sauverLocal();
+  }
+  afficher();
+}
+
+function initialiser(){
+  optionsListe($("#fStatut"), STATUTS);
+  optionsListe($("#fProgramme"), PROGRAMMES);
+  optionsListe($("#f_programme"), PROGRAMMES);
+  optionsListe($("#f_statut"), STATUTS);
+  $("#f_docs").innerHTML = DOCS.map(([k, lib]) =>
+    `<label><input type="checkbox" id="doc_${k}"> ${lib}</label>`).join("");
+  $("#q").addEventListener("input", afficher);
+  $("#fStatut").addEventListener("change", afficher);
+  $("#fProgramme").addEventListener("change", afficher);
+  $("#btnDue").addEventListener("click", () => { filtreDue = !filtreDue; $("#btnDue").classList.toggle("on", filtreDue); afficher(); });
+  $("#btnNew").addEventListener("click", () => ouvrirForme(null));
+  $("#btnCancel").addEventListener("click", () => $("#dlg").close());
+  $("#form").addEventListener("submit", enregistrer);
+  $("#list").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-act]");
+    if (!b) return;
+    if (b.dataset.act === "edit") ouvrirForme(fiches.find(f => f.id === b.dataset.id));
+    if (b.dataset.act === "del") supprimer(b.dataset.id);
+  });
+}
+
+(async function demarrer(){
+  initialiser();
+  if (APPS_SCRIPT_URL) {
+    $("#demoNote").style.display = "none";
+    try { await chargerDistant(); } catch(err){ chargerLocal(); }
+  } else {
+    chargerLocal();
+  }
+  afficher();
+})();
+</script>
+</body>
+</html>
