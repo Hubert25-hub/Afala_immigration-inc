@@ -376,6 +376,8 @@ function initialiser(){
   });
 }
 
+function esc(v){ return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
 function exporterPDF(id){
   const f = fiches.find(x => x.id === id);
   if (!f) return;
