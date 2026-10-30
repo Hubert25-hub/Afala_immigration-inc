@@ -113,6 +113,7 @@
     <select id="fStatut"><option value="">Tous les statuts</option></select>
     <select id="fProgramme"><option value="">Tous les programmes</option></select>
     <button class="btn btn-ghost btn-small" id="btnDue" type="button">À relancer</button>
+    <button class="btn btn-ghost btn-small" id="btnAcces" type="button" style="display:none">Mes accès</button>
     <button class="btn btn-red" id="btnNew" type="button">+ Nouvelle fiche</button>
   </div>
 
@@ -143,6 +144,19 @@
     <div class="form-actions">
       <button class="btn btn-ghost" type="button" id="btnCancel">Annuler</button>
       <button class="btn btn-red" type="submit">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgAcces">
+  <form class="fiche" id="formAcces" method="dialog">
+    <h2>Mes accès</h2>
+    <p class="sub">Choisis ton nouvel identifiant et ton nouveau mot de passe. Ils remplaceront les anciens tout de suite.</p>
+    <div style="margin-bottom:12px"><label class="fl" for="a_id">Nouvel identifiant</label><input id="a_id" required autocomplete="username"></div>
+    <div><label class="fl" for="a_pass">Nouveau mot de passe</label><input id="a_pass" type="text" required autocomplete="new-password"></div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" type="button" id="btnCancelAcces">Annuler</button>
+      <button class="btn btn-red" type="submit">Mettre à jour</button>
     </div>
   </form>
 </dialog>
@@ -348,11 +362,32 @@ function entrer(){
 async function chargerEtAfficher(){
   if (APPS_SCRIPT_URL) {
     $("#demoNote").style.display = "none";
+    $("#btnAcces").style.display = "";
     try { await chargerDistant(); } catch(err){ chargerLocal(); }
   } else {
     chargerLocal();
   }
   afficher();
+}
+
+async function changerAcces(e){
+  e.preventDefault();
+  const nid = $("#a_id").value.trim(), npass = $("#a_pass").value;
+  if (!nid || !npass || !window._auth) return;
+  try {
+    const r = await fetch(APPS_SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain" },
+      body: JSON.stringify({ action:"changerAcces", identifiant: window._auth.id, motdepasse: window._auth.pass,
+        nouvelIdentifiant: nid, nouveauMotDePasse: npass }) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.erreur || "Refusé");
+    window._auth = { id: nid, pass: npass };
+    sessionStorage.setItem("afala-id", nid);
+    sessionStorage.setItem("afala-pass", npass);
+    $("#dlgAcces").close();
+    alert("Tes accès sont à jour. Utilise les nouveaux à ta prochaine connexion.");
+  } catch(err) {
+    alert("Changement impossible pour le moment, vérifie la connexion puis réessaie.");
+  }
 }
 
 async function connecter(e){
@@ -378,6 +413,9 @@ async function connecter(e){
 (function demarrer(){
   initialiser();
   $("#loginForm").addEventListener("submit", connecter);
+  $("#btnAcces").addEventListener("click", () => { $("#a_id").value = (window._auth || {}).id || ""; $("#a_pass").value = ""; $("#dlgAcces").showModal(); });
+  $("#btnCancelAcces").addEventListener("click", () => $("#dlgAcces").close());
+  $("#formAcces").addEventListener("submit", changerAcces);
   if (APPS_SCRIPT_URL) {
     const id = sessionStorage.getItem("afala-id"), pass = sessionStorage.getItem("afala-pass");
     if (id && pass) { window._auth = { id, pass }; entrer(); }
