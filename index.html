@@ -101,11 +101,12 @@ nav.main a:hover{color:var(--red)}
 .hero-dots button.active{background:var(--red)}
 .hero-dots button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media(max-width:560px){.hero{padding-top:36px}.hero-photo figcaption{display:none}.hero-dots{left:16px;right:auto}}
-@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}.hero-slide.active img{animation:none}}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}.hero-slide.active img{animation:none}.marquee-track{animation:none}}
 
 /* ---------- marquee ---------- */
 .marquee{background:var(--red);color:#fff;overflow:hidden;padding:15px 0;margin-top:0}
-.marquee-track{display:flex;gap:0;width:max-content;will-change:transform}
+.marquee-track{display:flex;gap:0;width:max-content;will-change:transform;animation:marquee-scroll 30s linear infinite}
+@keyframes marquee-scroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .marquee span{font-family:"Archivo Narrow",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:17px;white-space:nowrap;padding-right:14px}
 .marquee i{font-style:normal;color:#FFC9CB;padding-right:14px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -731,29 +732,14 @@ footer a:hover{color:#fff}
 <div class="toast" id="waToast" role="status"><b>WhatsApp · AFALA IMMIGRATION INC</b>418 509 8246 (appels seulement) · 581 525 6184 (appel et WhatsApp) · +228 91 50 99 54 (WhatsApp uniquement).</div>
 
 <script>
-// Marquee : contenu dupliqué pour une boucle sans fin, défilement piloté en
-// JavaScript (requestAnimationFrame) pour qu'il ne puisse jamais rester figé
+// Marquee : contenu dupliqué une fois, le défilement est une animation CSS
+// pure (translateX de 0 à -50%) gérée par le moteur graphique du navigateur.
+// L'ancien pilotage JavaScript image par image dépendait du fil principal:
+// sur une page lourde, il finissait par rester figé.
 (function(){
   var t = document.getElementById('marqueeTrack');
   if(!t) return;
   t.innerHTML += t.innerHTML;
-  var half = 0, pos = 0, last = null;
-  function measure(){ half = t.scrollWidth / 2; }
-  measure();
-  window.addEventListener('resize', measure);
-  window.addEventListener('load', measure);
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  function frame(ts){
-    if(last === null) last = ts;
-    var dt = Math.min((ts - last) / 1000, 0.1); last = ts;
-    if(half > 0){
-      pos -= 55 * dt;
-      if(pos <= -half) pos += half;
-      t.style.transform = 'translate3d(' + pos + 'px,0,0)';
-    }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
 })();
 
 // Diaporamas photo : fondu automatique toutes les quelques secondes.
