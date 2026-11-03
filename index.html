@@ -788,8 +788,7 @@ footer a:hover{color:#fff}
     if(cfg.root){
       // Souris seulement : sur tactile, l'entrée de la souris simulée par iOS
       // ne se relâche jamais et figeait le diaporama pour de bon.
-      cfg.root.addEventListener('pointerenter', function(e){ if(e.pointerType === 'mouse') holdUntil = Infinity; });
-      cfg.root.addEventListener('pointerleave', function(e){ if(e.pointerType === 'mouse' && holdUntil === Infinity) holdUntil = 0; });
+      // Pas de pause au survol: la photo prend tout l'écran, la souris est presque toujours dessus et le diaporama semblait figé pour de bon.
       // Tactile : pause pendant le toucher, reprise automatique 2,5 s après le relâchement.
       cfg.root.addEventListener('touchstart', function(){ holdUntil = Infinity; }, {passive:true});
       var release = function(){ holdUntil = Date.now() + 2500; };
