@@ -904,5 +904,108 @@ footer a:hover{color:#fff}
     });
     })();
 </script>
+<script>
+// Marquee : contenu dupliqué une fois, le défilement est une animation CSS
+// pure (translateX de 0 à -50%) gérée par le moteur graphique du navigateur.
+// L'ancien pilotage JavaScript image par image dépendait du fil principal:
+// sur une page lourde, il finissait par rester figé.
+(function(){
+  var t = document.getElementById('marqueeTrack');
+  if(!t) return;
+  t.innerHTML += t.innerHTML;
+})();
+
+// Diaporamas photo : fondu automatique toutes les quelques secondes.
+// La rotation tourne en permanence : une pause (souris ou tactile) expire
+// toujours toute seule, elle ne peut jamais rester collée.
+(function(){
+  function createSlideshow(cfg){
+    var slides = cfg.slides, labels = cfg.labels || null, labelEl = cfg.labelEl || null,
+        dotsBox = cfg.dotsBox || null, delay = cfg.delay, idx = 0, holdUntil = 0, dots = [];
+    if(!slides.length) return;
+    function render(){
+      slides.forEach(function(s,i){ s.classList.toggle('active', i === idx); });
+      if(labelEl && labels) labelEl.textContent = labels[idx];
+      dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); d.setAttribute('aria-pressed', i === idx ? 'true' : 'false'); });
+    }
+    function go(n){ idx = (n + slides.length) % slides.length; render(); }
+    if(dotsBox){
+      slides.forEach(function(s,i){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Voir la photo : ' + (labels ? labels[i] : ('photo ' + (i + 1))));
+        b.addEventListener('click', function(){ holdUntil = 0; go(i); });
+        dotsBox.appendChild(b); dots.push(b);
+      });
+    }
+    if(cfg.root){
+      // Souris seulement : sur tactile, l'entrée de la souris simulée par iOS
+      // ne se relâche jamais et figeait le diaporama pour de bon.
+      // Pas de pause au survol: la photo prend tout l'écran, la souris est presque toujours dessus et le diaporama semblait figé pour de bon.
+      // Tactile : pause pendant le toucher, reprise automatique 2,5 s après le relâchement.
+      cfg.root.addEventListener('touchstart', function(){ holdUntil = Infinity; }, {passive:true});
+      var release = function(){ holdUntil = Date.now() + 2500; };
+      cfg.root.addEventListener('touchend', release, {passive:true});
+      cfg.root.addEventListener('touchcancel', release, {passive:true});
+      cfg.root.addEventListener('focusin', function(){ holdUntil = Infinity; });
+      cfg.root.addEventListener('focusout', function(){ if(holdUntil === Infinity) holdUntil = 0; });
+    }
+    render();
+    if(slides.length > 1){
+      setInterval(function(){
+        if(Date.now() < holdUntil) return;
+        go(idx + 1);
+      }, delay);
+    }
+  }
+
+  (function(){
+    var panels = Array.prototype.slice.call(document.querySelectorAll('#heroCard .hc-panel'));
+    if(panels.length < 2) return;
+    var idx = 0;
+    setInterval(function(){
+      panels[idx].classList.remove('active');
+      idx = (idx + 1) % panels.length;
+      panels[idx].classList.add('active');
+    }, 6000);
+  })();
+  createSlideshow({
+    root: document.getElementById('heroPhoto'),
+    slides: Array.prototype.slice.call(document.querySelectorAll('#heroPhoto .hero-slide')),
+    labels: ['Rocheuses · Alberta','Toronto · Ontario','Québec · Québec','Vancouver · Colombie Britannique','Niagara · Ontario','Banff · Alberta'],
+    labelEl: document.getElementById('heroBadge'),
+    dotsBox: document.getElementById('heroDots'),
+    delay: 5000
+  });
+
+  createSlideshow({
+    root: document.getElementById('photoBreak'),
+    slides: Array.prototype.slice.call(document.querySelectorAll('#photoBreak .pb-slide')),
+    labels: ['Montréal · Québec','Ottawa · Ontario','Vancouver · Colombie-Britannique'],
+    labelEl: document.getElementById('pbLabel'),
+    delay: 7000
+  });
+})();
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var btn=item.querySelector('.faq-q');
+  btn.addEventListener('click',function(){
+    var open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.faq-q').setAttribute('aria-expanded','false');});
+    if(!open){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
+  });
+});
+
+// WhatsApp demo buttons
+var toast=document.getElementById('waToast'), toastTimer;
+document.querySelectorAll('[data-wa]').forEach(function(el){
+  el.addEventListener('click',function(){
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){toast.classList.remove('show');},5200);
+  });
+});
+</script>
 </body>
 </html>
