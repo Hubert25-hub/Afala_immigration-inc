@@ -680,16 +680,40 @@ footer a:hover{color:#fff}
   </style>
 <section id="consultation">
     <div class="wrap">
-      <div class="consult-layout">
-        <div>
-          <h2 class="consult-titre">Consultation initiale</h2>
-          <p class="consult-sub">Des conseils stratégiques</p>
-          <p class="consult-txt">Reçois des conseils d’experts pour ton immigration au Canada, adaptés à ta situation et à ton budget. Tout commence par le questionnaire d’admissibilité, envoyé sur WhatsApp. La consultation approfondie vient ensuite : ton profil est analysé en détail, tes questions reçoivent des réponses claires, et la stratégie de ton dossier est définie avant de passer à l’action.</p>
-          <div class="consult-grid">
-            <div class="consult-card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h3>Consultation approfondie</h3><p><span class="prix">Payante.</span> Le tarif et la durée te sont confirmés par le cabinet avant le rendez-vous, sans surprise.</p></div>
-          </div>
-        </div>
-        <form class="test-card consult-form" id="consultForm" novalidate>
+      <h2 class="consult-titre">Consultation initiale</h2>
+      <p class="consult-sub">Des conseils stratégiques</p>
+      <p class="consult-txt">Reçois des conseils d’experts pour ton immigration au Canada, adaptés à ta situation et à ton budget. Tout commence par le questionnaire d’admissibilité, envoyé sur WhatsApp. La consultation approfondie vient ensuite : ton profil est analysé en détail, tes questions reçoivent des réponses claires, et la stratégie de ton dossier est définie avant de passer à l’action.</p>
+      <div class="consult-grid">
+        <div class="consult-card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h3>Consultation approfondie</h3><p><span class="prix">Payante.</span> Le tarif et la durée te sont confirmés par le cabinet avant le rendez-vous, sans surprise.</p></div>
+      </div>
+      <a class="btn btn-red" href="#rendez-vous">Réserver ma consultation</a>
+    </div>
+  </section>
+  <style>
+    .field textarea{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);resize:vertical}
+    .field textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
+    .rdv-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px}
+    .rdv-list li{font-size:15.5px;line-height:1.45}
+    .rdv-list b{display:block;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:2px}
+    .rdv-list a{color:var(--ink);font-weight:800;text-decoration:none}
+    .rdv-list a:hover{color:var(--red)}
+  </style>
+  <section id="rendez-vous" class="section-gray">
+    <div class="wrap test-layout">
+      <div class="test-side">
+        <p class="sec-kicker">Rendez-vous</p>
+        <h2>Réserve ta <span class="red">consultation</span></h2>
+        <p>Choisis le moment qui te convient : remplis le formulaire et paie ta consultation en ligne, de façon sécurisée. Le cabinet reçoit ta demande et te confirme ton rendez-vous. La consultation approfondie est payante : le paiement se fait au moment de la réservation.</p>
+        <ul class="rdv-list">
+          <li><b>Téléphone</b><a href="tel:+14185098246">418 509 8246</a></li>
+          <li><b>Téléphone et WhatsApp</b><a href="tel:+15815256184">581 525 6184</a></li>
+          <li><b>WhatsApp uniquement (Togo)</b><a href="https://wa.me/22891509954" target="_blank" rel="noopener">+228 91 50 99 54</a></li>
+          <li><b>Courriel</b><a href="mailto:info@afalaimmigration.ca">info@afalaimmigration.ca</a></li>
+          <li><b>Cabinet</b>317-308 Rue du Bourgeois, Rimouski, QC, G5L 7P9, Canada</li>
+          <li><b>Heures</b>Lundi au samedi · 9 h à 18 h</li>
+        </ul>
+      </div>
+      <form class="test-card consult-form" id="consultForm" novalidate>
         <h3>Réserve et paie ta consultation</h3>
         <p class="sub">Remplis le formulaire, paie en ligne de façon sécurisée, et le cabinet te confirme ton rendez-vous.</p>
         <div class="field">
@@ -737,78 +761,6 @@ footer a:hover{color:#fff}
         <button class="btn btn-red" type="submit">Passer au paiement</button>
         <p class="form-note">Paiement sécurisé par Stripe. Le cabinet reçoit ta demande et te confirme ton rendez-vous après le paiement.</p>
         <div class="form-result" id="consultResult" role="status" aria-live="polite"></div>
-      </form>
-      </div>
-    </div>
-  </section>
-  <style>
-    .field textarea{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);resize:vertical}
-    .field textarea:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
-    .rdv-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px}
-    .rdv-list li{font-size:15.5px;line-height:1.45}
-    .rdv-list b{display:block;font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:2px}
-    .rdv-list a{color:var(--ink);font-weight:800;text-decoration:none}
-    .rdv-list a:hover{color:var(--red)}
-  </style>
-  <section id="rendez-vous" class="section-gray">
-    <div class="wrap test-layout">
-      <div class="test-side">
-        <p class="sec-kicker">Rendez-vous</p>
-        <h2>Réserve ta <span class="red">consultation</span></h2>
-        <p>Choisis le moment qui te convient : remplis le formulaire et ta demande part directement sur le WhatsApp d'AFALA IMMIGRATION INC. Le cabinet te confirme ton rendez-vous en retour. La consultation approfondie est payante : le tarif te sera confirmé au moment de valider ton rendez-vous.</p>
-        <ul class="rdv-list">
-          <li><b>Téléphone</b><a href="tel:+14185098246">418 509 8246</a></li>
-          <li><b>Téléphone et WhatsApp</b><a href="tel:+15815256184">581 525 6184</a></li>
-          <li><b>WhatsApp uniquement (Togo)</b><a href="https://wa.me/22891509954" target="_blank" rel="noopener">+228 91 50 99 54</a></li>
-          <li><b>Courriel</b><a href="mailto:info@afalaimmigration.ca">info@afalaimmigration.ca</a></li>
-          <li><b>Cabinet</b>317-308 Rue du Bourgeois, Rimouski, QC, G5L 7P9, Canada</li>
-          <li><b>Heures</b>Lundi au samedi · 9 h à 18 h</li>
-        </ul>
-      </div>
-      <form class="test-card" id="rdvForm" novalidate>
-        <h3>Prendre rendez-vous</h3>
-        <p class="sub">Ta demande part sur le WhatsApp du cabinet</p>
-        <div class="field">
-          <label for="r-nom">Ton nom complet</label>
-          <input id="r-nom" type="text" autocomplete="name" placeholder="Prénom et nom">
-        </div>
-        <div class="field">
-          <label for="r-tel">Ton téléphone ou WhatsApp</label>
-          <input id="r-tel" type="tel" autocomplete="tel" placeholder="Numéro où te joindre">
-        </div>
-        <div class="field">
-          <label for="r-prog">Service visé</label>
-          <select id="r-prog">
-            <option value="">Choisir…</option>
-            <option>Résidence temporaire (études, visiteur, travail, super visa, AVE)</option>
-            <option>Regroupement et parrainage familial</option>
-            <option>Entrée express et candidats des provinces</option>
-            <option>Demande d'asile</option>
-            <option>Citoyenneté canadienne</option>
-            <option>Résidence permanente pour considérations humanitaires</option>
-            <option>Je ne sais pas encore</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="r-date">Date souhaitée</label>
-          <input id="r-date" type="date">
-        </div>
-        <div class="field">
-          <label for="r-moment">Moment souhaité</label>
-          <select id="r-moment">
-            <option value="">Choisir…</option>
-            <option>Matin (9 h à 12 h)</option>
-            <option>Après-midi (12 h à 15 h)</option>
-            <option>Fin de journée (15 h à 18 h)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="r-msg">Ton message (optionnel)</label>
-          <textarea id="r-msg" rows="3" placeholder="Décris ton projet en quelques mots"></textarea>
-        </div>
-        <button class="btn btn-red" type="submit">Envoyer ma demande sur WhatsApp</button>
-        <p class="form-note">La consultation approfondie est un service payant : le cabinet te confirme le tarif et ton rendez-vous avant la consultation.</p>
-        <div class="form-result" id="rdvResult" role="status" aria-live="polite"></div>
       </form>
     </div>
   </section>
@@ -1044,6 +996,8 @@ document.getElementById('testForm').addEventListener('submit',function(e){
   (function(){
     var f = document.getElementById('consultForm');
     if(!f) return;
+    var cd = document.getElementById('c-date');
+    if(cd){ cd.min = new Date().toISOString().split('T')[0]; }
     function v(id){var e=document.getElementById(id);return e?e.value.trim():''}
     f.addEventListener('submit', function(ev){
       ev.preventDefault();
