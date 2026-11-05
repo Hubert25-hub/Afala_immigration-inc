@@ -531,21 +531,35 @@ footer a:hover{color:#fff}
   </section>
 
   <!-- TEST -->
+    <style>
+    .etape{font-family:Archivo,sans-serif;font-weight:800;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--red);margin:20px 0 14px}
+    .etape:first-of-type{margin-top:2px}
+  </style>
   <section id="test">
     <div class="wrap test-layout">
       <div class="test-side">
-        <p class="sec-kicker">Questionnaire d’admissibilité</p>
-        <h2>2 minutes pour savoir <span class="red">où tu te situes</span></h2>
-        <p>Réponds à 5 questions courtes. Ton questionnaire part sur le WhatsApp d’AFALA IMMIGRATION INC, sans frais d’envoi. Le cabinet fait ensuite ton analyse d’admissibilité en profondeur : cette analyse et la consultation approfondie sont payantes, et le tarif te sera confirmé avant de commencer.</p>
+        <p class="sec-kicker">Admissibilité et consultation</p>
+        <h2>Deux étapes, <span class="red">un seul formulaire</span></h2>
+        <p>Réponds aux 5 questions d’admissibilité, puis réserve ta consultation dans la foulée. Le cabinet reçoit tout en même temps : ton questionnaire et ta demande de rendez-vous, et il te confirme après le paiement.</p>
         <ul class="test-points">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Envoi du questionnaire sans frais, sur WhatsApp</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Questionnaire et réservation reçus ensemble par le cabinet</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Paiement en ligne sécurisé par Stripe</li>
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Réponse d'AFALA IMMIGRATION INC sous 24 h ouvrables</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Une lecture honnête : si ton profil n'est pas prêt, on te dit quoi renforcer</li>
+        </ul>
+        <ul class="rdv-list">
+          <li><b>Téléphone</b><a href="tel:+14185098246">418 509 8246</a></li>
+          <li><b>Téléphone et WhatsApp</b><a href="tel:+15815256184">581 525 6184</a></li>
+          <li><b>WhatsApp uniquement (Togo)</b><a href="https://wa.me/22891509954" target="_blank" rel="noopener">+228 91 50 99 54</a></li>
+          <li><b>Courriel</b><a href="mailto:info@afalaimmigration.ca">info@afalaimmigration.ca</a></li>
+          <li><b>Cabinet</b>317-308 Rue du Bourgeois, Rimouski, QC, G5L 7P9, Canada</li>
+          <li><b>Heures</b>Lundi au samedi · 9 h à 18 h</li>
         </ul>
       </div>
-      <form class="test-card" id="testForm" novalidate>
-        <h3>Vérifie ton admissibilité</h3>
-        <p class="sub">5 questions · résultat envoyé sur WhatsApp</p>
+      <div id="rendez-vous" style="scroll-margin-top:96px">
+      <form class="test-card consult-form" id="parcoursForm" novalidate>
+        <h3>Commence ton parcours</h3>
+        <p class="sub">Étape 1 : ton admissibilité · Étape 2 : ta consultation</p>
+        <p class="etape">Étape 1 · Ton admissibilité</p>
         <div class="field">
           <label for="f-prog">1 · Quel service vises-tu ?</label>
           <select id="f-prog" required>
@@ -587,10 +601,41 @@ footer a:hover{color:#fff}
             <option>33 à 40 ans</option><option>41 ans et plus</option>
           </select>
         </div>
-        <button class="btn btn-red" type="submit">Envoyer mon questionnaire sur WhatsApp</button>
-        <p class="form-note">Le bouton prépare ton récapitulatif ci-dessous, puis tu l'envoies sur le WhatsApp d'AFALA IMMIGRATION INC.</p>
-        <div class="form-result" id="formResult" role="status" aria-live="polite"></div>
+                <p class="etape">Étape 2 · Ta consultation</p>
+        <div class="field">
+          <label for="c-nom">Ton nom complet</label>
+          <input id="c-nom" type="text" autocomplete="name" placeholder="Prénom et nom">
+        </div>
+        <div class="field">
+          <label for="c-tel">Ton téléphone ou WhatsApp</label>
+          <input id="c-tel" type="tel" autocomplete="tel" placeholder="Numéro où te joindre">
+        </div>
+        <div class="field">
+          <label for="c-mail">Ton courriel</label>
+          <input id="c-mail" type="email" autocomplete="email" placeholder="Adresse courriel">
+        </div>
+        <div class="field">
+          <label for="c-date">Date souhaitée</label>
+          <input id="c-date" type="date">
+        </div>
+        <div class="field">
+          <label for="c-moment">Moment souhaité</label>
+          <select id="c-moment">
+            <option value="">Choisir…</option>
+            <option>Matin (9 h à 12 h)</option>
+            <option>Après-midi (12 h à 15 h)</option>
+            <option>Fin de journée (15 h à 18 h)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-msg">Ton message (optionnel)</label>
+          <textarea id="c-msg" rows="3" placeholder="Décris ton projet en quelques mots"></textarea>
+        </div>
+                <button class="btn btn-red" type="submit">Envoyer et passer au paiement</button>
+        <p class="form-note">Paiement sécurisé par Stripe. Le cabinet reçoit ton questionnaire et ta demande, puis te confirme ton rendez-vous après le paiement.</p>
+        <div class="form-result" id="parcoursResult" role="status" aria-live="polite"></div>
       </form>
+      </div>
     </div>
   </section>
 
@@ -698,72 +743,7 @@ footer a:hover{color:#fff}
     .rdv-list a{color:var(--ink);font-weight:800;text-decoration:none}
     .rdv-list a:hover{color:var(--red)}
   </style>
-  <section id="rendez-vous" class="section-gray">
-    <div class="wrap test-layout">
-      <div class="test-side">
-        <p class="sec-kicker">Rendez-vous</p>
-        <h2>Réserve ta <span class="red">consultation</span></h2>
-        <p>Choisis le moment qui te convient : remplis le formulaire et paie ta consultation en ligne, de façon sécurisée. Le cabinet reçoit ta demande et te confirme ton rendez-vous. La consultation approfondie est payante : le paiement se fait au moment de la réservation.</p>
-        <ul class="rdv-list">
-          <li><b>Téléphone</b><a href="tel:+14185098246">418 509 8246</a></li>
-          <li><b>Téléphone et WhatsApp</b><a href="tel:+15815256184">581 525 6184</a></li>
-          <li><b>WhatsApp uniquement (Togo)</b><a href="https://wa.me/22891509954" target="_blank" rel="noopener">+228 91 50 99 54</a></li>
-          <li><b>Courriel</b><a href="mailto:info@afalaimmigration.ca">info@afalaimmigration.ca</a></li>
-          <li><b>Cabinet</b>317-308 Rue du Bourgeois, Rimouski, QC, G5L 7P9, Canada</li>
-          <li><b>Heures</b>Lundi au samedi · 9 h à 18 h</li>
-        </ul>
-      </div>
-      <form class="test-card consult-form" id="consultForm" novalidate>
-        <h3>Réserve et paie ta consultation</h3>
-        <p class="sub">Remplis le formulaire, paie en ligne de façon sécurisée, et le cabinet te confirme ton rendez-vous.</p>
-        <div class="field">
-          <label for="c-nom">Ton nom complet</label>
-          <input id="c-nom" type="text" autocomplete="name" placeholder="Prénom et nom">
-        </div>
-        <div class="field">
-          <label for="c-tel">Ton téléphone ou WhatsApp</label>
-          <input id="c-tel" type="tel" autocomplete="tel" placeholder="Numéro où te joindre">
-        </div>
-        <div class="field">
-          <label for="c-mail">Ton courriel</label>
-          <input id="c-mail" type="email" autocomplete="email" placeholder="Adresse courriel">
-        </div>
-        <div class="field">
-          <label for="c-prog">Service visé</label>
-          <select id="c-prog">
-            <option value="">Choisir…</option>
-            <option>Résidence temporaire (études, visiteur, travail, super visa, AVE)</option>
-            <option>Regroupement et parrainage familial</option>
-            <option>Entrée express et candidats des provinces</option>
-            <option>Demande d'asile</option>
-            <option>Citoyenneté canadienne</option>
-            <option>Résidence permanente pour considérations humanitaires</option>
-            <option>Je ne sais pas encore</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="c-date">Date souhaitée</label>
-          <input id="c-date" type="date">
-        </div>
-        <div class="field">
-          <label for="c-moment">Moment souhaité</label>
-          <select id="c-moment">
-            <option value="">Choisir…</option>
-            <option>Matin (9 h à 12 h)</option>
-            <option>Après-midi (12 h à 15 h)</option>
-            <option>Fin de journée (15 h à 18 h)</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="c-msg">Ton message (optionnel)</label>
-          <textarea id="c-msg" rows="3" placeholder="Décris ton projet en quelques mots"></textarea>
-        </div>
-        <button class="btn btn-red" type="submit">Passer au paiement</button>
-        <p class="form-note">Paiement sécurisé par Stripe. Le cabinet reçoit ta demande et te confirme ton rendez-vous après le paiement.</p>
-        <div class="form-result" id="consultResult" role="status" aria-live="polite"></div>
-      </form>
-    </div>
-  </section>
+  
 
 
   <section class="final" id="contact">
@@ -826,133 +806,7 @@ footer a:hover{color:#fff}
 </a>
 <div class="toast" id="waToast" role="status"><b>WhatsApp · AFALA IMMIGRATION INC</b>418 509 8246 (appels seulement) · 581 525 6184 (appel et WhatsApp) · +228 91 50 99 54 (WhatsApp uniquement).</div>
 
-<script>
-// Marquee : contenu dupliqué une fois, le défilement est une animation CSS
-// pure (translateX de 0 à -50%) gérée par le moteur graphique du navigateur.
-// L'ancien pilotage JavaScript image par image dépendait du fil principal:
-// sur une page lourde, il finissait par rester figé.
-(function(){
-  var t = document.getElementById('marqueeTrack');
-  if(!t) return;
-  t.innerHTML += t.innerHTML;
-})();
 
-// Diaporamas photo : fondu automatique toutes les quelques secondes.
-// La rotation tourne en permanence : une pause (souris ou tactile) expire
-// toujours toute seule, elle ne peut jamais rester collée.
-(function(){
-  function createSlideshow(cfg){
-    var slides = cfg.slides, labels = cfg.labels || null, labelEl = cfg.labelEl || null,
-        dotsBox = cfg.dotsBox || null, delay = cfg.delay, idx = 0, holdUntil = 0, dots = [];
-    if(!slides.length) return;
-    function render(){
-      slides.forEach(function(s,i){ s.classList.toggle('active', i === idx); });
-      if(labelEl && labels) labelEl.textContent = labels[idx];
-      dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); d.setAttribute('aria-pressed', i === idx ? 'true' : 'false'); });
-    }
-    function go(n){ idx = (n + slides.length) % slides.length; render(); }
-    if(dotsBox){
-      slides.forEach(function(s,i){
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Voir la photo : ' + (labels ? labels[i] : ('photo ' + (i + 1))));
-        b.addEventListener('click', function(){ holdUntil = 0; go(i); });
-        dotsBox.appendChild(b); dots.push(b);
-      });
-    }
-    if(cfg.root){
-      // Souris seulement : sur tactile, l'entrée de la souris simulée par iOS
-      // ne se relâche jamais et figeait le diaporama pour de bon.
-      // Pas de pause au survol: la photo prend tout l'écran, la souris est presque toujours dessus et le diaporama semblait figé pour de bon.
-      // Tactile : pause pendant le toucher, reprise automatique 2,5 s après le relâchement.
-      cfg.root.addEventListener('touchstart', function(){ holdUntil = Infinity; }, {passive:true});
-      var release = function(){ holdUntil = Date.now() + 2500; };
-      cfg.root.addEventListener('touchend', release, {passive:true});
-      cfg.root.addEventListener('touchcancel', release, {passive:true});
-      cfg.root.addEventListener('focusin', function(){ holdUntil = Infinity; });
-      cfg.root.addEventListener('focusout', function(){ if(holdUntil === Infinity) holdUntil = 0; });
-    }
-    render();
-    if(slides.length > 1){
-      setInterval(function(){
-        if(Date.now() < holdUntil) return;
-        go(idx + 1);
-      }, delay);
-    }
-  }
-
-  (function(){
-    var panels = Array.prototype.slice.call(document.querySelectorAll('#heroCard .hc-panel'));
-    if(panels.length < 2) return;
-    var idx = 0;
-    setInterval(function(){
-      panels[idx].classList.remove('active');
-      idx = (idx + 1) % panels.length;
-      panels[idx].classList.add('active');
-    }, 6000);
-  })();
-  createSlideshow({
-    root: document.getElementById('heroPhoto'),
-    slides: Array.prototype.slice.call(document.querySelectorAll('#heroPhoto .hero-slide')),
-    labels: ['Rocheuses · Alberta','Toronto · Ontario','Québec · Québec','Vancouver · Colombie Britannique','Niagara · Ontario','Banff · Alberta'],
-    labelEl: document.getElementById('heroBadge'),
-    dotsBox: document.getElementById('heroDots'),
-    delay: 5000
-  });
-
-  createSlideshow({
-    root: document.getElementById('photoBreak'),
-    slides: Array.prototype.slice.call(document.querySelectorAll('#photoBreak .pb-slide')),
-    labels: ['Montréal · Québec','Ottawa · Ontario','Vancouver · Colombie-Britannique'],
-    labelEl: document.getElementById('pbLabel'),
-    delay: 7000
-  });
-})();
-
-// FAQ accordion
-document.querySelectorAll('.faq-item').forEach(function(item){
-  var btn=item.querySelector('.faq-q');
-  btn.addEventListener('click',function(){
-    var open=item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.faq-q').setAttribute('aria-expanded','false');});
-    if(!open){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
-  });
-});
-
-// WhatsApp demo buttons
-var toast=document.getElementById('waToast'), toastTimer;
-document.querySelectorAll('[data-wa]').forEach(function(el){
-  el.addEventListener('click',function(){
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer=setTimeout(function(){toast.classList.remove('show');},5200);
-  });
-});
-
-// Test d'admissibilité : prépare le récapitulatif (démo, aucun envoi)
-document.getElementById('testForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  var fields=[['Service visé','f-prog'],['Niveau d\u2019études','f-edu'],['Langues parlées','f-lang'],['Expérience de travail','f-exp'],['Âge','f-age']];
-  var missing=[], rows='', lines=[];
-  fields.forEach(function(f){
-    var v=document.getElementById(f[1]).value;
-    if(!v){missing.push(f[0]);}
-    else{rows+='<li><b style="color:inherit">'+f[0]+' :</b> '+v+'</li>'; lines.push(f[0]+' : '+v);}
-  });
-  var box=document.getElementById('formResult');
-  if(missing.length){
-    box.className='form-result show';
-    box.style.background='#FDECEC'; box.style.borderColor='#F5B8BA';
-    box.innerHTML='<b style="color:#B30F18">Il manque quelques réponses :</b> '+missing.join(', ')+'. Complète-les pour préparer ton évaluation.';
-    box.scrollIntoView({behavior:'smooth',block:'center'});
-    return;
-  }
-  box.className='form-result show';
-  box.style.background=''; box.style.borderColor='';
-  box.innerHTML='<b>Ton récapitulatif est prêt.</b> Envoie-le à AFALA IMMIGRATION INC sur WhatsApp pour demander ton analyse d’admissibilité :<ul>'+rows+'</ul><a class="btn btn-red" style="margin-top:12px" target="_blank" rel="noopener" href="https://wa.me/15815256184?text="+encodeURIComponent('Bonjour AFALA IMMIGRATION INC, voici mon test d\'admissibilité :\n'+lines.join('\n'))+'">Envoyer sur WhatsApp</a><p style="margin:10px 0 0">Le cabinet te répond sous 24 h ouvrables et te confirme le tarif de l’analyse approfondie avant de commencer.</p>';
-  box.scrollIntoView({behavior:'smooth',block:'center'});
-});
-</script>
 
 <script>
 // Prise de rendez-vous : la demande part sur le WhatsApp d'AFALA IMMIGRATION INC
@@ -991,35 +845,38 @@ document.getElementById('testForm').addEventListener('submit',function(e){
     s.addEventListener('click',fermer);setTimeout(fermer,2100);})();
 </script>
 
+
+
 <script>
   var LIEN_STRIPE_CONSULTATION = "";
   (function(){
-    var f = document.getElementById('consultForm');
+    var f = document.getElementById('parcoursForm');
     if(!f) return;
     var cd = document.getElementById('c-date');
     if(cd){ cd.min = new Date().toISOString().split('T')[0]; }
-    function v(id){var e=document.getElementById(id);return e?e.value.trim():''}
+    function v(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+    function dateFr(val){ var p = val.split('-'); return p.length === 3 ? (p[2] + '/' + p[1] + '/' + p[0]) : val; }
+    var box = document.getElementById('parcoursResult');
+    function erreur(manquants){
+      box.className = 'form-result error';
+      box.innerHTML = '<b style="color:#B30F18">Il manque quelques réponses :</b> ' + manquants.join(', ') + '.';
+      box.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    var champsTest = [['f-prog','le service visé'],['f-edu',"ton niveau d'études"],['f-lang','les langues que tu parles'],['f-exp','ton expérience de travail'],['f-age','ton âge']];
     f.addEventListener('submit', function(ev){
       ev.preventDefault();
-      var box = document.getElementById('consultResult');
       var manquants = [];
-      if(!v('c-nom')) manquants.push('ton nom complet');
-      if(!v('c-tel')) manquants.push('ton téléphone ou WhatsApp');
-      if(!v('c-mail')) manquants.push('ton courriel');
-      if(!v('c-prog')) manquants.push('le service visé');
-      if(!v('c-date')) manquants.push('la date souhaitée');
-      if(!v('c-moment')) manquants.push('le moment souhaité');
-      if(manquants.length){
-        box.className = 'form-result error';
-        box.innerHTML = '<b style="color:#B30F18">Il manque quelques réponses :</b> ' + manquants.join(', ') + '.';
-        return;
-      }
+      champsTest.forEach(function(c){ if(!v(c[0])) manquants.push(c[1]); });
+      [['c-nom','ton nom complet'],['c-tel','ton téléphone ou WhatsApp'],['c-mail','ton courriel'],['c-date','la date souhaitée'],['c-moment','le moment souhaité']].forEach(function(c){ if(!v(c[0])) manquants.push(c[1]); });
+      if(manquants.length){ erreur(manquants); return; }
       box.className = 'form-result';
-      box.textContent = 'Envoi de ta demande au cabinet…';
+      box.textContent = 'Envoi de ton questionnaire et de ta demande au cabinet…';
       var donnees = {
-        _subject: 'Nouvelle demande de consultation payante, site AFALA',
+        _subject: 'Parcours complet : admissibilité et consultation, site AFALA',
+        'Service visé': v('f-prog'), "Niveau d'études": v('f-edu'), 'Langues parlées': v('f-lang'),
+        'Expérience de travail': v('f-exp'), 'Âge': v('f-age'),
         Nom: v('c-nom'), 'Téléphone ou WhatsApp': v('c-tel'), Courriel: v('c-mail'),
-        'Service visé': v('c-prog'), 'Date souhaitée': v('c-date'), 'Moment souhaité': v('c-moment'),
+        'Date souhaitée': dateFr(v('c-date')), 'Moment souhaité': v('c-moment'),
         Message: v('c-msg') || 'Aucun'
       };
       fetch('https://formsubmit.co/ajax/info@afalaimmigration.ca', {
@@ -1028,15 +885,15 @@ document.getElementById('testForm').addEventListener('submit',function(e){
         body: JSON.stringify(donnees)
       }).catch(function(){}).finally(function(){
         if(LIEN_STRIPE_CONSULTATION){
-          box.textContent = 'Demande envoyée. Redirection vers le paiement sécurisé…';
+          box.textContent = 'Tout est envoyé au cabinet. Redirection vers le paiement sécurisé…';
           setTimeout(function(){ window.location.href = LIEN_STRIPE_CONSULTATION; }, 900);
         } else {
           box.className = 'form-result success';
-          box.textContent = 'Merci, ta demande est envoyée au cabinet. Le cabinet te confirme ton rendez-vous et les modalités de paiement.';
+          box.textContent = 'Merci, ton questionnaire et ta demande sont envoyés au cabinet. Le cabinet te confirme ton rendez-vous et les modalités de paiement.';
         }
       });
     });
-  })();
+    })();
 </script>
 </body>
 </html>
