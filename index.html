@@ -347,6 +347,22 @@ footer a:hover{color:#fff}
         <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Consultant réglementé CRIC-CISR</li>
       </ul>
     </div>
+      <style>
+    .hero-photo{position:relative}
+    .hero-card{position:absolute;left:26px;top:50%;transform:translateY(-50%);width:min(472px,calc(100% - 52px));background:#fff;border-radius:18px;box-shadow:0 24px 54px rgba(20,24,29,.25);padding:28px;z-index:6}
+    .hc-panels{display:grid}
+    .hc-panel{grid-area:1/1;opacity:0;transition:opacity .8s ease;pointer-events:none;display:flex;flex-direction:column;align-items:flex-start}
+    .hc-panel.active{opacity:1;pointer-events:auto}
+    .hc-panel h3{margin:0 0 10px;font-size:clamp(21px,2.4vw,26px);font-weight:800;line-height:1.2}
+    .hc-panel p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+    .hc-panel .btn{margin-top:20px}
+    .hc-badge{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .hc-medal{flex:none;display:grid;place-items:center}
+    .hc-medal img{width:56px;height:56px;object-fit:contain}
+    .hc-badge .t1{font-weight:800;font-size:16.5px;line-height:1.25}
+    .hc-badge .t2{color:var(--red);font-weight:800;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+    @media(max-width:760px){.hero-card{left:12px;right:12px;width:auto;top:auto;bottom:12px;transform:none;padding:20px;max-height:calc(100% - 24px);overflow-y:auto}.hc-panel h3{font-size:20px}.hc-panel p{font-size:14px}.hc-panel .btn{margin-top:14px}}
+  </style>
     <figure class="wrap hero-photo" id="heroPhoto">
       <div class="hero-slides">
         <div class="hero-slide active">
@@ -374,7 +390,29 @@ footer a:hover{color:#fff}
         <b>Un projet, un plan, un dossier solide.</b>
         <span>Commence par le test d'admissibilité : 5 questions, 2 minutes, une première lecture honnête de ton profil.</span>
       </figcaption>
-    </figure>
+          <div class="hero-card" id="heroCard">
+        <div class="hc-panels">
+          <div class="hc-panel active">
+            <h3>Bienvenue chez AFALA IMMIGRATION INC</h3>
+            <p>Des services de conseil et d’accompagnement pour réussir ton projet d’immigration au Canada. Explore nos services : il nous fera plaisir de t’accompagner dans la réalisation de ton rêve canadien.</p>
+            <a class="btn btn-red" href="#services">Découvrir nos services</a>
+          </div>
+          <div class="hc-panel">
+            <div class="hc-badge">
+              <span class="hc-medal"><img src="data:image/png;base64,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" alt="Monogramme AFALA"></span>
+              <div><div class="t1">Consultant réglementé en immigration canadienne</div><div class="t2">CRIC-CISR n° R1056148</div></div>
+            </div>
+            <p>Dr Michel Tamkpanka Tamtare, consultant réglementé en immigration canadienne. Cabinet basé à Rimouski, dans l’Est du Québec.</p>
+            <a class="btn btn-red" href="#rendez-vous">Contact</a>
+          </div>
+          <div class="hc-panel">
+            <h3>Consultation initiale</h3>
+            <p>Des conseils stratégiques pour ton projet : ton profil est analysé en détail et la stratégie de ton dossier est définie avant de passer à l’action.</p>
+            <a class="btn btn-red" href="#consultation">Réserver ma consultation</a>
+          </div>
+        </div>
+      </div>
+      </figure>
   </section>
 
   <!-- MARQUEE -->
@@ -891,6 +929,16 @@ footer a:hover{color:#fff}
     }
   }
 
+  (function(){
+    var panels = Array.prototype.slice.call(document.querySelectorAll('#heroCard .hc-panel'));
+    if(panels.length < 2) return;
+    var idx = 0;
+    setInterval(function(){
+      panels[idx].classList.remove('active');
+      idx = (idx + 1) % panels.length;
+      panels[idx].classList.add('active');
+    }, 6000);
+  })();
   createSlideshow({
     root: document.getElementById('heroPhoto'),
     slides: Array.prototype.slice.call(document.querySelectorAll('#heroPhoto .hero-slide')),
