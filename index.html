@@ -1061,5 +1061,209 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
   appliquer(lang);
 })();
 </script>
+<style>
+.afala-chat-btn{position:fixed;right:18px;bottom:18px;z-index:80;width:58px;height:58px;border-radius:16px;background:var(--red);border:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(16,18,22,.45);transition:transform .15s ease,background .15s ease}
+.afala-chat-btn:hover{transform:scale(1.06);background:#C01419}
+.afala-chat-panel{position:fixed;right:18px;bottom:88px;z-index:80;width:min(380px,calc(100vw - 24px));height:min(560px,calc(100dvh - 110px));background:#FBFAF7;border:1.5px solid #14161A;display:none;flex-direction:column;box-shadow:0 30px 60px -20px rgba(16,18,22,.5);font-family:Archivo,sans-serif}
+.afala-chat-panel.open{display:flex}
+.afala-chat-head{background:var(--red);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.afala-chat-head .avatar{width:38px;height:38px;flex:none;background:#14161A;color:#fff;display:grid;place-items:center;font-weight:900;font-size:19px}
+.afala-chat-head h4{margin:0;font-size:16.5px;font-weight:800;line-height:1.15}
+.afala-chat-head p{margin:2px 0 0;font-size:12px;opacity:.92;line-height:1.25}
+.afala-chat-close{margin-left:auto;background:transparent;border:0;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:4px 6px}
+.afala-chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px}
+.afala-msg{max-width:86%;padding:10px 13px;font-size:14.5px;line-height:1.45;white-space:pre-line}
+.afala-msg.bot{background:#fff;border:1.5px solid #E3DED4;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#26292F}
+.afala-msg.user{background:#14161A;color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.afala-msg a{color:var(--red);font-weight:700}
+.afala-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}
+.afala-chip{border:1.5px solid var(--red);color:var(--red);background:#fff;font-family:Archivo,sans-serif;font-weight:700;font-size:13px;padding:7px 11px;cursor:pointer;border-radius:999px}
+.afala-chip:hover{background:var(--red);color:#fff}
+.afala-chat-form{display:flex;gap:8px;padding:10px;border-top:1.5px solid #E3DED4;background:#fff}
+.afala-chat-form input{flex:1;border:1.5px solid #C9C4B8;padding:11px 12px;font-family:Archivo,sans-serif;font-size:14.5px;border-radius:10px;outline:none;min-width:0}
+.afala-chat-form input:focus{border-color:var(--red)}
+.afala-chat-send{flex:none;width:46px;border:0;background:var(--red);color:#fff;cursor:pointer;border-radius:10px;display:grid;place-items:center}
+.afala-chat-send:hover{background:#C01419}
+.afala-chat-note{margin:0;padding:8px 12px 10px;font-size:11.5px;color:#7A7568;text-align:center;background:#fff;line-height:1.35}
+@media(max-width:560px){.afala-chat-panel{right:12px;bottom:84px}.afala-chat-btn{right:12px;bottom:12px}}
+</style>
+<button class="afala-chat-btn" id="afalaChatBtn" type="button" aria-label="Ouvrir l'assistant AFALA"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+<div class="afala-chat-panel" id="afalaChatPanel" role="dialog" aria-label="Assistant AFALA">
+  <div class="afala-chat-head">
+    <div class="avatar">A</div>
+    <div><h4 id="afalaChatTitle">Assistant AFALA</h4><p id="afalaChatSub">Réponses générales, puis le cabinet si nécessaire</p></div>
+    <button class="afala-chat-close" id="afalaChatClose" type="button" aria-label="Fermer">×</button>
+  </div>
+  <div class="afala-chat-msgs" id="afalaChatMsgs"></div>
+  <div class="afala-chips" id="afalaChatChips"></div>
+  <form class="afala-chat-form" id="afalaChatForm">
+    <input id="afalaChatInput" type="text" autocomplete="off" placeholder="Écris ta question...">
+    <button class="afala-chat-send" type="submit" aria-label="Envoyer"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M3 20v-6l8-2-8-2V4l19 8z"/></svg></button>
+  </form>
+  <p class="afala-chat-note" id="afalaChatNote">Informations générales seulement. Aucune réponse ne remplace une consultation professionnelle.</p>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var LANG = (window.AFALA_LANG === 'en' || localStorage.getItem('afala-lang') === 'en') ? 'en' : 'fr';
+  var T = {
+    fr: {
+      sub: "Réponses générales, puis le cabinet si nécessaire",
+      placeholder: "Écris ta question...",
+      note: "Informations générales seulement. Aucune réponse ne remplace une consultation professionnelle.",
+      greeting: "Bonjour ! Je peux répondre à tes questions générales sur les services d'AFALA et les démarches d'immigration canadienne. Pour une analyse personnalisée de ton profil, la consultation avec le cabinet reste la meilleure porte d'entrée.",
+      chips: ["Nos services", "Prendre rendez-vous", "La consultation", "Nous contacter"],
+      fallback: "Je ne peux pas répondre avec certitude à cette question. Écris-nous à info@afalaimmigration.ca ou passe par le formulaire de consultation, le cabinet te répondra directement.",
+      answers: {
+        services: "AFALA accompagne 12 services : permis d'études, visa visiteur, super visa, permis de travail, demande EIMT, résidence permanente, Entrée express, candidats des provinces, regroupement familial, demande d'asile, résidence permanente pour considérations humanitaires et citoyenneté canadienne.\nDis-moi ton projet, je te dirige vers le bon service.",
+        etudes: "Le permis d'études permet d'étudier dans un établissement canadien. Le cabinet prépare ton dossier au complet, de l'admission à l'obtention du permis.\nTu peux commencer par le test d'admissibilité sur le site, section Admissibilité et consultation.",
+        visiteur: "Le visa visiteur sert pour le tourisme ou pour visiter ta famille au Canada. Si tu es un voyageur admissible, l'autorisation de voyage électronique (AVE) peut suffire. Le cabinet prépare ta demande au complet.",
+        supervisa: "Le super visa permet aux parents et aux grands-parents de rester plus longtemps auprès de leur famille au Canada. Le cabinet monte le dossier au complet.",
+        travail: "Le permis de travail permet de travailler légalement au Canada, lié à un employeur ou à ton profil selon ta situation. Le cabinet vérifie la voie qui correspond à ton cas.",
+        eimt: "La demande EIMT (étude d'impact sur le marché du travail) concerne les employeurs qui recrutent un travailleur étranger. Le cabinet prépare la demande pour l'employeur.",
+        residence: "La résidence permanente permet de vivre, travailler et étudier partout au Canada de façon permanente. Les voies principales sont Entrée express, les candidats des provinces et le regroupement familial. Le cabinet identifie celle qui correspond à ton profil.",
+        express: "Entrée express sélectionne les travailleurs qualifiés pour la résidence permanente. Le cabinet bâtit ton profil et maximise tes chances d'être sélectionné.",
+        provinces: "Chaque province choisit ses candidats selon ses besoins. Le cabinet cible la province qui correspond à ton profil et prépare ta demande de nomination.",
+        famille: "Le regroupement familial permet de réunir conjoint, enfants ou parents au Canada, par le parrainage. Le cabinet monte le dossier au complet, étape par étape.",
+        asile: "La demande d'asile est préparée avec rigueur et présentée avec soin, du dépôt jusqu'à la décision. Vu la sensibilité de ces dossiers, une consultation est fortement recommandée.",
+        citoyennete: "Pour la citoyenneté canadienne, le cabinet vérifie ton admissibilité et prépare ta demande au complet.",
+        humanitaire: "La résidence permanente pour considérations humanitaires vise les situations exceptionnelles. Le cabinet monte un dossier solide, présenté avec soin. Une consultation est recommandée pour évaluer ton cas.",
+        consultation: "La consultation approfondie est payante et dure 1 h. Le tarif t'est confirmé par le cabinet avant le rendez-vous, sans surprise.\nPour réserver : remplis le formulaire dans la section Admissibilité et consultation du site (7 questions, puis ta prise de rendez-vous).",
+        prix: "Les tarifs dépendent du service choisi et de la complexité de ton dossier, le cabinet te les confirme clairement avant de commencer. La consultation approfondie est payante et dure 1 h. Les frais gouvernementaux restent séparés et payés directement aux autorités.",
+        delais: "Les délais varient selon le service et le pays de dépôt : quelques semaines pour un visa visiteur, plusieurs mois pour une résidence permanente. Dès la consultation, le cabinet te donne l'estimation réaliste pour ton dossier.",
+        documents: "La base est presque toujours la même : passeport valide, diplômes et relevés, preuves d'expérience de travail, preuves de fonds et tests de langue selon le service. Après le test d'admissibilité, tu reçois la liste exacte pour ton cas.",
+        contact: "Pour joindre le cabinet :\nTéléphone : +1 418 509 8246 (appels seulement)\nTéléphone et WhatsApp : +1 581 525 6184\nWhatsApp (Togo) : +228 91 50 99 54\nCourriel : info@afalaimmigration.ca\nHoraires : lundi au samedi, 9 h à 18 h.",
+        adresse: "Le cabinet est basé à Rimouski, au Québec : 317-308 Rue du Bourgeois, Rimouski, QC G5L 7P9, Canada. Les dossiers sont accompagnés à distance partout au Canada et à l'international.",
+        langues: "L'accompagnement se fait en français ou en anglais, selon ta préférence.",
+        refus: "Un refus n'est pas toujours une fin. Le cabinet analyse d'abord les motifs officiels du refus, puis les options : nouvelle demande renforcée, demande de réexamen ou un autre service mieux adapté à ton profil.",
+        merci: "Avec plaisir ! Si tu veux aller plus loin, le test d'admissibilité et la consultation sont la prochaine étape. Bonne chance dans ton projet !"
+      }
+    },
+    en: {
+      sub: "General answers first, then the firm if needed",
+      placeholder: "Type your question...",
+      note: "General information only. No answer replaces a professional consultation.",
+      greeting: "Hello! I can answer your general questions about AFALA's services and Canadian immigration procedures. For a personalized analysis of your profile, a consultation with the firm is the best first step.",
+      chips: ["Our services", "Book an appointment", "The consultation", "Contact us"],
+      fallback: "I cannot answer this question with certainty. Write to us at info@afalaimmigration.ca or use the consultation form, the firm will reply to you directly.",
+      answers: {
+        services: "AFALA supports 12 services: study permit, visitor visa, super visa, work permit, LMIA application, permanent residence, Express Entry, provincial nominees, family reunification, asylum claim, permanent residence on humanitarian and compassionate grounds, and Canadian citizenship.\nTell me about your project and I will point you to the right service.",
+        etudes: "A study permit lets you study at a Canadian institution. The firm prepares your complete application, from admission to the permit itself.\nYou can start with the eligibility test on this site, in the Eligibility and consultation section.",
+        visiteur: "A visitor visa is for tourism or visiting family in Canada. If you are an eligible traveller, an electronic travel authorization (eTA) may be enough. The firm prepares your complete application.",
+        supervisa: "The super visa lets parents and grandparents stay longer with their family in Canada. The firm puts together the complete application.",
+        travail: "A work permit lets you work legally in Canada, tied to an employer or to your profile depending on your situation. The firm checks which path fits your case.",
+        eimt: "The LMIA application is for employers hiring a foreign worker. The firm prepares the application for the employer.",
+        residence: "Permanent residence lets you live, work and study anywhere in Canada permanently. The main paths are Express Entry, provincial nominees and family reunification. The firm identifies the one that fits your profile.",
+        express: "Express Entry selects skilled workers for permanent residence. The firm builds your profile and maximizes your chances of being selected.",
+        provinces: "Each province chooses its candidates based on its needs. The firm targets the province that fits your profile and prepares your nomination application.",
+        famille: "Family reunification brings a spouse, children or parents to Canada through sponsorship. The firm builds the complete case, step by step.",
+        asile: "An asylum claim is prepared with rigour and presented with care, from filing to the decision. Given how sensitive these cases are, a consultation is strongly recommended.",
+        citoyennete: "For Canadian citizenship, the firm verifies your eligibility and prepares your complete application.",
+        humanitaire: "Permanent residence on humanitarian and compassionate grounds covers exceptional situations. The firm builds a solid case, presented with care. A consultation is recommended to assess your situation.",
+        consultation: "The in-depth consultation is paid and lasts 1 hour. The fee is confirmed by the firm before the appointment, with no surprises.\nTo book: fill out the form in the Eligibility and consultation section of this site (7 questions, then your booking).",
+        prix: "Fees depend on the chosen service and the complexity of your case, and the firm confirms them clearly before starting. The in-depth consultation is paid and lasts 1 hour. Government fees remain separate and are paid directly to the authorities.",
+        delais: "Processing times vary by service and by the country where you file: a few weeks for a visitor visa, several months for permanent residence. Right at the consultation, the firm gives you a realistic estimate for your case.",
+        documents: "The basics are almost always the same: a valid passport, diplomas and transcripts, proof of work experience, proof of funds and language tests depending on the service. After the eligibility test, you receive the exact list for your situation.",
+        contact: "To reach the firm:\nPhone: +1 418 509 8246 (calls only)\nPhone and WhatsApp: +1 581 525 6184\nWhatsApp (Togo): +228 91 50 99 54\nEmail: info@afalaimmigration.ca\nHours: Monday to Saturday, 9 a.m. to 6 p.m.",
+        adresse: "The firm is based in Rimouski, Quebec: 317-308 Rue du Bourgeois, Rimouski, QC G5L 7P9, Canada. Cases are supported remotely across Canada and internationally.",
+        langues: "Support is offered in French or English, whichever you prefer.",
+        refus: "A refusal is not always the end. The firm first analyzes the official reasons for the refusal, then the options: a stronger new application, a request for reconsideration, or another service better suited to your profile.",
+        merci: "You're welcome! If you want to go further, the eligibility test and the consultation are the next step. Good luck with your project!"
+      }
+    }
+  };
+  var KEYS = [
+    ["consultation", ["consultation", "rendez-vous", "rendez vous", "rdv", "appointment", "booking", "book"]],
+    ["prix", ["prix", "cout", "tarif", "combien", "frais", "honoraire", "price", "cost", "fee", "fees", "how much"]],
+    ["contact", ["contact", "joindre", "telephone", "appeler", "courriel", "email", "whatsapp", "numero", "reach", "phone", "call"]],
+    ["services", ["service", "services", "offre", "programme", "program", "offer"]],
+    ["etudes", ["etudes", "etude", "etudiant", "universite", "college", "ecole", "study", "student", "school"]],
+    ["supervisa", ["super visa", "supervisa", "grands-parents", "grandparents"]],
+    ["visiteur", ["visiteur", "visite", "tourisme", "tourist", "visitor", "visit", "ave", "eta"]],
+    ["eimt", ["eimt", "lmia", "employeur", "recrute", "employer", "hiring"]],
+    ["travail", ["travail", "travailler", "emploi", "job", "work"]],
+    ["express", ["express", "crs", "tirage", "draw"]],
+    ["provinces", ["province", "provinces", "provincial", "pnp", "nomination", "nominee"]],
+    ["residence", ["residence permanente", "permanent residence", "installer", "immigrer", "settle"]],
+    ["famille", ["famille", "regroupement", "parrainage", "conjoint", "epouse", "epoux", "family", "sponsor", "spouse", "reunification"]],
+    ["asile", ["asile", "refugie", "asylum", "refugee"]],
+    ["citoyennete", ["citoyennete", "citoyen", "citizenship", "citizen", "passeport", "passport"]],
+    ["humanitaire", ["humanitaire", "humanitarian", "compassionate"]],
+    ["delais", ["delai", "temps", "duree", "long", "time", "long", "delay", "processing"]],
+    ["documents", ["document", "documents", "papier", "piece", "prepare"]],
+    ["adresse", ["adresse", "situe", "rimouski", "bureau", "address", "located", "office", "where"]],
+    ["langues", ["langue", "anglais", "francais", "english", "french", "language"]],
+    ["refus", ["refus", "refuse", "rejet", "refused", "refusal", "denied"]],
+    ["merci", ["merci", "thanks", "thank"]]
+  ];
+  var CHIP_ACTIONS = {
+    "Nos services": "services", "Our services": "services",
+    "Prendre rendez-vous": "consultation", "Book an appointment": "consultation",
+    "La consultation": "consultation", "The consultation": "consultation",
+    "Nous contacter": "contact", "Contact us": "contact"
+  };
+  var t = T[LANG];
+  var panel = document.getElementById('afalaChatPanel');
+  var msgs = document.getElementById('afalaChatMsgs');
+  var chipsBox = document.getElementById('afalaChatChips');
+  var input = document.getElementById('afalaChatInput');
+  var started = false;
+  document.getElementById('afalaChatSub').textContent = t.sub;
+  document.getElementById('afalaChatNote').textContent = t.note;
+  input.setAttribute('placeholder', t.placeholder);
+  function norm(x){ return ' ' + x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ') + ' '; }
+  function addMsg(text, who){
+    var d = document.createElement('div');
+    d.className = 'afala-msg ' + who;
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  function answerFor(q){
+    var n = norm(q), best = null, bestScore = 0;
+    for (var i = 0; i < KEYS.length; i++){
+      var score = 0;
+      for (var j = 0; j < KEYS[i][1].length; j++){
+        var k = ' ' + KEYS[i][1][j].normalize('NFD').replace(/[\u0300-\u036f]/g, '') + ' ';
+        if (n.indexOf(k) > -1) score += (KEYS[i][1][j].indexOf(' ') > -1 ? 3 : 1);
+      }
+      if (score > bestScore){ bestScore = score; best = KEYS[i][0]; }
+    }
+    if (best) return t.answers[best];
+    if (/bonjour|salut|hello|bonsoir|hi/.test(n)) return t.greeting;
+    return t.fallback;
+  }
+  function showChips(){
+    chipsBox.innerHTML = '';
+    t.chips.forEach(function(label){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'afala-chip'; b.textContent = label;
+      b.addEventListener('click', function(){
+        addMsg(label, 'user');
+        var key = CHIP_ACTIONS[label];
+        setTimeout(function(){ addMsg(t.answers[key], 'bot'); }, 250);
+      });
+      chipsBox.appendChild(b);
+    });
+  }
+  function openPanel(){
+    panel.classList.add('open');
+    if (!started){ started = true; addMsg(t.greeting, 'bot'); showChips(); }
+    setTimeout(function(){ input.focus(); }, 60);
+  }
+  document.getElementById('afalaChatBtn').addEventListener('click', function(){
+    panel.classList.contains('open') ? panel.classList.remove('open') : openPanel();
+  });
+  document.getElementById('afalaChatClose').addEventListener('click', function(){ panel.classList.remove('open'); });
+  document.getElementById('afalaChatForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = input.value.trim();
+    if (!q) return;
+    addMsg(q, 'user');
+    input.value = '';
+    setTimeout(function(){ addMsg(answerFor(q), 'bot'); }, 300);
+  });
+});
+</script>
+
 </body>
 </html>
