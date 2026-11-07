@@ -116,7 +116,7 @@ section{padding:76px 0}
 .sec-head{max-width:720px;margin-bottom:38px}
 .sec-kicker{font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
 .sec-head h2{font-size:clamp(30px,4.6vw,46px);line-height:1.02;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:0}
-.sec-head h3.sec-sub{font-size:clamp(19px,2.4vw,25px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;margin:12px 0 0;color:var(--ink)}
+.sec-head h3.sec-sub,.test-side h3.sec-sub{font-size:clamp(19px,2.4vw,25px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;margin:12px 0 0;color:var(--ink)}
 .sec-head p{color:var(--ink-2);font-size:16.5px;margin:14px 0 0}
 
 /* services */
@@ -194,7 +194,7 @@ footer .wordmark img.brand-logo{height:50px}
 .test-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:start}
 @media(max-width:860px){.test-layout{grid-template-columns:1fr}}
 .test-side h2{font-size:clamp(30px,4.4vw,44px);font-weight:900;text-transform:uppercase;line-height:1.02;margin:0 0 14px}
-.test-side h2 .red{color:var(--red)}
+.test-side h2 .red,.test-side h3 .red{color:var(--red)}
 .test-side p{color:var(--ink-2);margin:0 0 18px}
 .test-points{list-style:none;padding:0;margin:0;display:grid;gap:12px}
 .test-points li{display:flex;gap:11px;font-weight:600;font-size:15px}
@@ -551,8 +551,8 @@ footer a:hover{color:#fff}
   <section id="test">
     <div class="wrap test-layout">
       <div class="test-side">
-        <p class="sec-kicker">Admissibilité et consultation</p>
-        <h2>Deux étapes, <span class="red">un seul formulaire</span></h2>
+        <h2>Admissibilité et consultation</h2>
+        <h3 class="sec-sub">Deux étapes, <span class="red">un seul formulaire</span></h3>
         <p>Réponds aux 5 questions d’admissibilité, puis réserve ta consultation dans la foulée. Le cabinet reçoit tout en même temps : ton questionnaire et ta demande de rendez-vous, et il te confirme après le paiement.</p>
         <ul class="test-points">
           <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Questionnaire et réservation reçus ensemble par le cabinet</li>
