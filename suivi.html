@@ -100,14 +100,13 @@
 </header>
 
 <div class="demo-note" id="demoNote">
-  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : identifiant <b>Afala</b>, mot de passe <b>Immigration2026</b>, à remplacer par les accès personnels du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
+  <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : mot de passe <b>Immigration2026</b>, à remplacer par le mot de passe personnel du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
 </div>
 
 <section id="loginBox" style="max-width:430px;margin:26px auto 0;padding:0 20px">
   <form class="fiche" id="loginForm" style="background:#fff;border:1px solid var(--line);border-radius:14px">
     <h2>Espace du consultant</h2>
     <p class="sub">Connecte toi pour ouvrir le suivi des dossiers du cabinet.</p>
-    <div style="margin-bottom:12px"><label class="fl" for="l_id">Identifiant</label><input id="l_id" required autocomplete="username"></div>
     <div><label class="fl" for="l_pass">Mot de passe</label><input id="l_pass" type="password" required autocomplete="current-password"></div>
     <p id="l_err" style="color:var(--red);font-size:13px;min-height:16px;margin-top:8px"></p>
     <div class="form-actions" style="justify-content:stretch">
@@ -176,8 +175,7 @@
 <dialog id="dlgAcces">
   <form class="fiche" id="formAcces" method="dialog">
     <h2>Mes accès</h2>
-    <p class="sub">Choisis ton nouvel identifiant et ton nouveau mot de passe. Ils remplaceront les anciens tout de suite.</p>
-    <div style="margin-bottom:12px"><label class="fl" for="a_id">Nouvel identifiant</label><input id="a_id" required autocomplete="username"></div>
+    <p class="sub">Choisis ton nouveau mot de passe. Il remplacera l'ancien tout de suite.</p>
     <div><label class="fl" for="a_pass">Nouveau mot de passe</label><input id="a_pass" type="text" required autocomplete="new-password"></div>
     <div class="form-actions">
       <button class="btn btn-ghost" type="button" id="btnCancelAcces">Annuler</button>
@@ -191,6 +189,9 @@
 // Le jour de l'installation, inscrire ici l'adresse de l'application Web
 // Apps Script du Google Sheet du cabinet, produite par le guide d'installation.
 const APPS_SCRIPT_URL = "";
+// Identifiant interne du cabinet (jamais affiché) : à l'installation,
+// inscrire le même que celui enregistré dans le tableau du cabinet.
+const IDENTIFIANT_SUIVI = "Afala";
 
 const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis de travail","Parrainage familial","Résidence permanente","Citoyenneté","Autre"];
 const STATUTS = ["Nouveau contact","Consultation faite","Dossier en préparation","Soumis","Décision reçue","Refus à retravailler"];
@@ -434,10 +435,9 @@ async function chargerEtAfficher(){
 
 async function changerAcces(e){
   e.preventDefault();
-  const nid = $("#a_id").value.trim(), npass = $("#a_pass").value;
-  if (!nid || !npass) return;
+  const nid = (window._auth || {}).id || IDENTIFIANT_SUIVI, npass = $("#a_pass").value;
+  if (!npass) return;
   if (!APPS_SCRIPT_URL) {
-    sessionStorage.setItem("afala-demo-id", nid);
     sessionStorage.setItem("afala-demo-pass", npass);
     window._auth = { id: nid, pass: npass };
     $("#dlgAcces").close();
@@ -463,16 +463,16 @@ async function changerAcces(e){
 
 async function connecter(e){
   e.preventDefault();
-  const id = $("#l_id").value.trim(), pass = $("#l_pass").value;
+  const id = IDENTIFIANT_SUIVI, pass = $("#l_pass").value;
   if (APPS_SCRIPT_URL) {
     window._auth = { id, pass };
     try { await chargerDistant(); }
-    catch(err){ $("#l_err").textContent = "Identifiant ou mot de passe incorrect, ou connexion impossible."; return; }
+    catch(err){ $("#l_err").textContent = "Mot de passe incorrect, ou connexion impossible."; return; }
     sessionStorage.setItem("afala-id", id);
     sessionStorage.setItem("afala-pass", pass);
   } else {
     if (id !== demoId() || pass !== demoPass()) {
-      $("#l_err").textContent = "Identifiant ou mot de passe incorrect.";
+      $("#l_err").textContent = "Mot de passe incorrect.";
       return;
     }
     window._auth = { id, pass };
@@ -485,7 +485,7 @@ async function connecter(e){
 (function demarrer(){
   initialiser();
   $("#loginForm").addEventListener("submit", connecter);
-  $("#btnAcces").addEventListener("click", () => { $("#a_id").value = (window._auth || {}).id || ""; $("#a_pass").value = ""; $("#dlgAcces").showModal(); });
+  $("#btnAcces").addEventListener("click", () => { $("#a_pass").value = ""; $("#dlgAcces").showModal(); });
   $("#btnCancelAcces").addEventListener("click", () => $("#dlgAcces").close());
   $("#formAcces").addEventListener("submit", changerAcces);
   $("#btnClosePdf").addEventListener("click", () => $("#dlgPdf").close());
