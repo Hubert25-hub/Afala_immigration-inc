@@ -103,7 +103,8 @@
   <p>Aperçu de démonstration : les fiches sont enregistrées sur cet appareil. Connexion démo : mot de passe <b>Immigration2026</b>, à remplacer par le mot de passe personnel du consultant à l'installation. La version livrée sera reliée au Google Sheet du cabinet, et les documents des clients continuent d'arriver par courriel.</p>
 </div>
 
-<section id="loginBox" style="max-width:430px;margin:26px auto 0;padding:0 20px">
+<!-- connexion -->
+  <section id="loginBox" style="max-width:430px;margin:26px auto 0;padding:0 20px">
   <form class="fiche" id="loginForm" style="background:#fff;border:1px solid var(--line);border-radius:14px">
     <h2>Espace du consultant</h2>
     <p class="sub">Connecte toi pour ouvrir le suivi des dossiers du cabinet.</p>
@@ -115,7 +116,8 @@
   </form>
 </section>
 
-<main id="app" style="display:none">
+<!-- dossiers -->
+  <main id="app" style="display:none">
   <section class="stats" id="stats"></section>
 
   <div class="toolbar">
@@ -185,12 +187,12 @@
 </dialog>
 
 <script>
-// Configuration : laisser vide pour le mode démo (données sur cet appareil).
-// Le jour de l'installation, inscrire ici l'adresse de l'application Web
-// Apps Script du Google Sheet du cabinet, produite par le guide d'installation.
+
+
+
 const APPS_SCRIPT_URL = "";
-// Identifiant interne du cabinet (jamais affiché) : à l'installation,
-// inscrire le même que celui enregistré dans le tableau du cabinet.
+
+
 const IDENTIFIANT_SUIVI = "Afala";
 
 const PROGRAMMES = ["Permis d'études","Visa visiteur","Entrée Express","Permis de travail","Parrainage familial","Résidence permanente","Citoyenneté","Autre"];
