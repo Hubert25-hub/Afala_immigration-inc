@@ -66,7 +66,7 @@ nav.main a:hover{color:var(--red)}
 
 .hero{padding:52px 0 0;overflow:hidden}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
-.hero h1{font-size:clamp(44px,8.2vw,96px);line-height:.94;font-weight:900;text-transform:uppercase;letter-spacing:-.015em;margin:18px 0 0;max-width:11ch}
+.hero h1{font-size:clamp(44px,8.2vw,96px);line-height:.94;font-weight:900;text-transform:none;letter-spacing:-.015em;margin:18px 0 0;max-width:11ch}
 .hero h1 .red{color:var(--red)}
 .hero h1 .stroke{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
 .hero-sub{font-size:clamp(16.5px,2vw,19.5px);color:var(--ink-2);max-width:56ch;margin:22px 0 0}
@@ -105,7 +105,7 @@ section{padding:76px 0}
 .section-gray{background:var(--gray)}
 .sec-head{max-width:720px;margin-bottom:38px}
 .sec-kicker{font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
-.sec-head h2{font-size:clamp(30px,4.6vw,46px);line-height:1.02;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:0}
+.sec-head h2{font-size:clamp(30px,4.6vw,46px);line-height:1.02;font-weight:900;text-transform:none;letter-spacing:-.01em;margin:0}
 .sec-head h3.sec-sub,.test-side h3.sec-sub{font-size:clamp(19px,2.4vw,25px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;margin:12px 0 0;color:var(--ink)}
 .sec-head p{color:var(--ink-2);font-size:16.5px;margin:14px 0 0}
 
@@ -146,7 +146,7 @@ footer .wordmark img.brand-logo{height:50px}
 .about-photo.has-img::before{display:none}
 .about-photo.has-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}.about-photo.has-img{overflow:visible;box-shadow:0 26px 44px -20px rgba(16,18,22,.38)}.about-photo.has-img img{border-radius:var(--radius)}.about-photo.has-img::before{display:block;content:"";position:absolute;inset:0;border-radius:var(--radius);box-shadow:inset 0 -85px 60px -35px rgba(16,18,22,.48),inset 0 18px 28px -16px rgba(16,18,22,.26),inset 0 0 65px rgba(16,18,22,.12);z-index:1;pointer-events:none}.about-photo.has-img::after{content:"";position:absolute;inset:0;border:2px solid var(--red);border-radius:46px;transform:translate(12px,12px);z-index:2;pointer-events:none}@media(max-width:560px){.about-photo.has-img::after{border-radius:34px;transform:translate(8px,8px)}}
 .about-photo .photo-tag{display:inline-block;background:var(--ink);color:#fff;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
-.about-copy h2{font-size:clamp(30px,4.6vw,46px);line-height:1.02;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;margin:0 0 14px}
+.about-copy h2{font-size:clamp(30px,4.6vw,46px);line-height:1.02;font-weight:900;text-transform:none;letter-spacing:-.01em;margin:0 0 14px}
 .about-name{font-size:clamp(22px,3vw,28px);font-weight:900;line-height:1.1;margin:0}
 .about-name .placeholder{color:var(--red)}
 .about-role{margin:8px 0 0;font-weight:700;font-size:16.5px;color:var(--ink-2)}
@@ -184,7 +184,7 @@ footer .wordmark img.brand-logo{height:50px}
 
 .test-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:start}
 @media(max-width:860px){.test-layout{grid-template-columns:1fr}}
-.test-side h2{font-size:clamp(30px,4.4vw,44px);font-weight:900;text-transform:uppercase;line-height:1.02;margin:0 0 14px}
+.test-side h2{font-size:clamp(30px,4.4vw,44px);font-weight:900;text-transform:none;line-height:1.02;margin:0 0 14px}
 .test-side h2 .red,.test-side h3 .red{color:var(--red)}
 .test-side p{color:var(--ink-2);margin:0 0 18px}
 .test-points{list-style:none;padding:0;margin:0;display:grid;gap:12px}
@@ -246,7 +246,7 @@ footer .wordmark img.brand-logo{height:50px}
 
 .final{background:var(--red);color:#fff;padding:64px 0}
 .final .wrap{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
-.final h2{font-size:clamp(30px,5vw,52px);font-weight:900;text-transform:uppercase;line-height:.98;margin:0;max-width:16ch}
+.final h2{font-size:clamp(30px,5vw,52px);font-weight:900;text-transform:none;line-height:.98;margin:0;max-width:16ch}
 .final p{margin:12px 0 0;opacity:.92;max-width:46ch}
 
 
@@ -407,3 +407,29 @@ img,video{max-width:100%}
 
 @media(max-width:560px){.eyebrow{font-size:11px;letter-spacing:.13em;padding:9px 14px}}
 .about-copy h2.keep-case{text-transform:none}
+
+/* ===== Insigne du College dans le heros ===== */
+.hero-insigne{background:#fff;max-width:350px;margin-top:20px;padding:14px 16px;display:flex;flex-direction:column;gap:9px;box-shadow:0 18px 40px -18px rgba(0,0,0,.45)}
+.hero-insigne img{width:218px;max-width:100%;height:auto;display:block}
+.hero-insigne img.insigne-en{display:none}
+html[lang="en"] .hero-insigne img.insigne-en{display:block}
+html[lang="en"] .hero-insigne img.insigne-fr{display:none}
+.hero-insigne-name{font-weight:800;color:var(--ink);font-size:14px;line-height:1.25}
+.hero-insigne-link{color:var(--red-dark);font-size:12.5px;text-decoration:underline;text-underline-offset:3px;line-height:1.45;display:inline-block;margin-top:2px}
+@media(max-width:560px){.hero-insigne{max-width:300px;padding:12px 14px}.hero-insigne img{width:188px}}
+
+.hero-insigne{max-width:430px}
+.hero-insigne-sub{margin:4px 0 0;color:var(--ink-2);font-size:16.5px;line-height:1.5;border-top:1px solid var(--line);padding-top:10px}
+@media(max-width:560px){.hero-insigne{max-width:340px}.hero-insigne-sub{font-size:15px}}
+
+/* ===== Logo centre dans la carte et titres en casse normale ===== */
+.hero-insigne{align-items:center;text-align:center}
+.hero-insigne-sub{text-align:left}
+
+/* ===== Titres en casse normale sur tout le site (demande du cabinet) ===== */
+.eyebrow,.sec-kicker,.sec-head h3.sec-sub,.test-side h3.sec-sub,.step h3,.photobreak .big,.about-photo .photo-label,.about-photo .photo-tag,.consult-titre,footer h4,.devise-band,.marquee span,.svc-label,.etape,.rdv-list b{text-transform:none}
+.eyebrow{letter-spacing:.05em}
+.sec-kicker{letter-spacing:.06em}
+.devise-band{letter-spacing:.14em}
+.marquee span{letter-spacing:.05em}
+footer h4{letter-spacing:.05em}
