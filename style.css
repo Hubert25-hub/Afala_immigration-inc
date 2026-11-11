@@ -403,13 +403,4 @@ img,video{max-width:100%}
   .hero h1{font-size:clamp(34px,11.5vw,44px)}
 }
 
-/* ===== Banniere de consentement aux cookies ===== */
-.cookie-banner{position:fixed;left:18px;bottom:18px;z-index:90;width:min(430px,calc(100vw - 24px));background:#101216;color:#fff;padding:22px;box-shadow:0 24px 50px -18px rgba(16,18,22,.55);border-top:4px solid var(--red)}
-.cookie-banner[hidden]{display:none}
-.cookie-txt{margin:0;font-size:14.5px;line-height:1.55;color:#EDEEF0}
-.cookie-btns{display:flex;gap:10px;margin-top:16px}
-.cookie-btn{flex:1;padding:12px 10px;font:inherit;font-weight:800;font-size:14px;cursor:pointer}
-.cookie-refuse{background:transparent;color:#fff;border:1.5px solid #fff}
-.cookie-accept{background:var(--red);color:#fff;border:1.5px solid var(--red)}
 .foot-cookies{background:none;border:0;color:inherit;font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0;margin-left:14px}
-@media(max-width:560px){.cookie-banner{left:12px;bottom:12px}}
