@@ -12,13 +12,6 @@
   menu.addEventListener('click',function(e){ if(e.target.closest('a')) close(); });
   window.addEventListener('resize',function(){ if(window.innerWidth>860) close(); });
   
-  var wm=document.querySelector('header.site .wordmark'), taps=0, lastTap=0;
-  if(wm) wm.addEventListener('click',function(e){
-    var now=Date.now();
-    taps=(now-lastTap<800)?taps+1:1;
-    lastTap=now;
-    if(taps>=3){ e.preventDefault(); window.location.href='suivi.html'; }
-  });
 })();
 
 
