@@ -436,3 +436,12 @@ footer h4{letter-spacing:.05em}
 /* Slogans en casse normale (textes) */
 .brand-slogan{text-transform:none;letter-spacing:.03em}
 #splash .splash-slogan{text-transform:none;letter-spacing:.04em}
+
+/* ===== Pourquoi nous contacter ===== */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.why-card{background:#fff;border:1px solid var(--line);padding:26px 24px}
+.why-ico{width:46px;height:46px;background:var(--red);display:grid;place-items:center;margin-bottom:16px}
+.why-card h3{font-size:18px;font-weight:800;margin:0 0 8px;line-height:1.25}
+.why-card p{color:var(--ink-2);font-size:15px;line-height:1.55;margin:0}
+@media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.why-grid{grid-template-columns:1fr}}
