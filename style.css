@@ -433,3 +433,6 @@ html[lang="en"] .hero-insigne img.insigne-fr{display:none}
 .devise-band{letter-spacing:.14em}
 .marquee span{letter-spacing:.05em}
 footer h4{letter-spacing:.05em}
+/* Slogans en casse normale (textes) */
+.brand-slogan{text-transform:none;letter-spacing:.03em}
+#splash .splash-slogan{text-transform:none;letter-spacing:.04em}
