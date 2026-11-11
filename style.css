@@ -445,3 +445,6 @@ footer h4{letter-spacing:.05em}
 .why-card p{color:var(--ink-2);font-size:15px;line-height:1.55;margin:0}
 @media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.why-grid{grid-template-columns:1fr}}
+/* Portrait sans cadre ni ombre (demande du cabinet) */
+.about-photo.has-img{box-shadow:none}
+.about-photo.has-img::before,.about-photo.has-img::after{display:none}
