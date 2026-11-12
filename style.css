@@ -490,8 +490,9 @@ footer h4{letter-spacing:.05em}
 
 /* Coordonnees en icones */
 .coord-list{display:grid;gap:4px;margin-top:4px}
-.coord-row{display:flex;align-items:center;gap:12px;padding:7px 8px;border-radius:10px;text-decoration:none;color:var(--ink)}
+.coord-row{display:flex;align-items:flex-start;gap:12px;padding:7px 8px;border-radius:10px;text-decoration:none;color:var(--ink)}
 a.coord-row:hover{background:#F7F7F3}
+.coord-ics{display:flex;gap:8px;width:88px;flex:none}
 .coord-ic{width:38px;height:38px;flex:none;display:grid;place-items:center;background:#FDECEC;border-radius:10px;color:var(--red)}
 .coord-ic svg{display:block}
 .coord-val{font-weight:800;font-size:16.5px}
