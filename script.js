@@ -211,7 +211,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "Votre message": "Your message",
 "J'accepte que mes données soient traitées de manière confidentielle.": "I agree that my information will be handled confidentially.",
 "Envoyer le message": "Send the message",
-"Réponse sous 24 à 48 h. Pour une consultation, utilisez plutôt la prise de rendez-vous.": "Reply within 24 to 48 hours. For a consultation, please use the appointment booking instead.",
+"Réponse sous 24 h. Pour une consultation, utilisez plutôt la prise de rendez-vous.": "Reply within 24 hours. For a consultation, please use the appointment booking instead.",
 "Prendre rendez-vous en ligne": "Book an appointment online",
 "Consultation sur rendez-vous seulement.": "Consultations by appointment only.",
 "Accréditation :": "Accreditation:",
