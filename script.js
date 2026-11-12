@@ -200,7 +200,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 
 
 (function(){
-  var DICT = {"Votre projet d’immigration": "Your immigration project", "au Canada est notre priorité": "to Canada is our priority", "Accueil": "Home", "À propos": "About", "Heure souhaitée": "Preferred time", "9 h 00": "9:00 a.m.", "10 h 00": "10:00 a.m.", "11 h 00": "11:00 a.m.", "12 h 00": "12:00 p.m.", "13 h 00": "1:00 p.m.", "14 h 00": "2:00 p.m.", "15 h 00": "3:00 p.m.", "16 h 00": "4:00 p.m.", "17 h 00": "5:00 p.m.", "Appels et WhatsApp": "Calls and WhatsApp", "Appels": "Calls", "Admissibilité et contact": "Eligibility and contact", "Paiement sécurisé par Stripe.": "Secure payment by Stripe.", "Notre cabinet": "Our firm", "Processus": "Process", "Rendez-vous": "Appointment", "Prendre rendez-vous": "Book an appointment", "Titulaire d’un doctorat en océanographie physique de l’Université de Rimouski, mon engagement dans l’intégration des nouveaux arrivants a suscité en moi une passion pour l’immigration. Après une formation solide en immigration à l’Université de Montréal, je suis consultant accrédité, membre du Collège des consultants en immigration et en citoyenneté canadienne.": "I hold a PhD in physical oceanography from the Université de Rimouski, and my commitment to the integration of newcomers sparked in me a passion for immigration. After solid training in immigration at the Université de Montréal, I am an accredited consultant and a member of the College of Immigration and Citizenship Consultants of Canada.",
+  var DICT = {"Votre projet d’immigration": "Your immigration project", "au Canada est notre priorité": "to Canada is our priority", "Accueil": "Home", "À propos": "About", "Choisir une date…": "Choose a date…", "Ouvert du lundi au samedi.": "Open Monday to Saturday.", "Heure souhaitée": "Preferred time", "9 h 00": "9:00 a.m.", "10 h 00": "10:00 a.m.", "11 h 00": "11:00 a.m.", "12 h 00": "12:00 p.m.", "13 h 00": "1:00 p.m.", "14 h 00": "2:00 p.m.", "15 h 00": "3:00 p.m.", "16 h 00": "4:00 p.m.", "17 h 00": "5:00 p.m.", "Appels et WhatsApp": "Calls and WhatsApp", "Appels": "Calls", "Admissibilité et contact": "Eligibility and contact", "Paiement sécurisé par Stripe.": "Secure payment by Stripe.", "Notre cabinet": "Our firm", "Processus": "Process", "Rendez-vous": "Appointment", "Prendre rendez-vous": "Book an appointment", "Titulaire d’un doctorat en océanographie physique de l’Université de Rimouski, mon engagement dans l’intégration des nouveaux arrivants a suscité en moi une passion pour l’immigration. Après une formation solide en immigration à l’Université de Montréal, je suis consultant accrédité, membre du Collège des consultants en immigration et en citoyenneté canadienne.": "I hold a PhD in physical oceanography from the Université de Rimouski, and my commitment to the integration of newcomers sparked in me a passion for immigration. After solid training in immigration at the Université de Montréal, I am an accredited consultant and a member of the College of Immigration and Citizenship Consultants of Canada.",
 "Depuis Rimouski, au Québec, j’accompagne des candidats du Canada et de l’international dans leurs démarches d’immigration canadienne, en français ou en anglais. J’offre un service professionnel fondé sur la rigueur, l’honnêteté, la transparence et l’éthique.": "From Rimouski, Quebec, I support candidates from Canada and around the world with their Canadian immigration applications, in French or in English. I offer a professional service founded on rigour, honesty, transparency and ethics.",
 "Je comprends les difficultés que vous rencontrez dans vos démarches d’immigration. Avec toutes mes compétences acquises, mon rôle est de clarifier et de sécuriser vos démarches, afin que vous puissiez avancer en toute tranquillité, sans stress et en toute confiance. Avec une analyse approfondie et personnalisée de votre dossier, je suis capable d’anticiper les obstacles et de vous guider avec honnêteté dans un contexte propre à votre réalité.": "I understand the difficulties you face in your immigration process. With all the skills I have acquired, my role is to clarify and secure your process, so that you can move forward with peace of mind, without stress and with complete confidence. With a thorough and personalized analysis of your file, I am able to anticipate obstacles and guide you honestly, in a context shaped by your own reality.",
 "Un projet d’immigration est un projet de vie qui mérite du sérieux et de la rigueur. Et c’est avec professionnalisme, rigueur, honnêteté, transparence, respect et humanité que je m’engage à vous accompagner afin de réaliser votre projet canadien. N’hésitez pas à me contacter.": "An immigration project is a life project that deserves seriousness and rigour. And it is with professionalism, rigour, honesty, transparency, respect and humanity that I commit myself to supporting you in making your Canadian project a reality. Please do not hesitate to contact me.",
@@ -542,3 +542,49 @@ document.addEventListener('DOMContentLoaded', function(){
   go(0); play();
 })();
 
+/* Calendrier personnalise (remplace le champ date natif) */
+(function(){
+  var btn=document.getElementById('c-date-btn'); if(!btn) return;
+  var panel=document.getElementById('cal-panel'), grid=document.getElementById('cal-grid'), dow=document.getElementById('cal-dow'),
+      title=document.getElementById('cal-title'), prev=document.getElementById('cal-prev'), next=document.getElementById('cal-next'),
+      hidden=document.getElementById('c-date'), txt=document.getElementById('c-date-txt');
+  function lang(){ try{ return localStorage.getItem('afala-lang')==='en' ? 'en-CA' : 'fr-CA'; }catch(e){ return 'fr-CA'; } }
+  var today=new Date(); today.setHours(0,0,0,0);
+  var view=new Date(today.getFullYear(), today.getMonth(), 1);
+  var sel=null;
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function render(){
+    var L=lang();
+    title.textContent=new Intl.DateTimeFormat(L,{month:'long',year:'numeric'}).format(view);
+    dow.innerHTML='';
+    for(var i=0;i<7;i++){ var sp=document.createElement('span'); sp.textContent=new Intl.DateTimeFormat(L,{weekday:'short'}).format(new Date(2024,0,1+i)).replace('.',''); dow.appendChild(sp); }
+    grid.innerHTML='';
+    var y=view.getFullYear(), m=view.getMonth();
+    var first=(new Date(y,m,1).getDay()+6)%7, n=new Date(y,m+1,0).getDate(), b, d;
+    for(b=0;b<first;b++){ var e=document.createElement('span'); e.className='cal-day off'; grid.appendChild(e); }
+    for(d=1; d<=n; d++){
+      (function(d){
+        var dt=new Date(y,m,d);
+        var cell=document.createElement('button'); cell.type='button'; cell.className='cal-day'; cell.textContent=d;
+        if(dt.getTime()===today.getTime()) cell.classList.add('today');
+        if(sel && dt.getTime()===sel.getTime()) cell.classList.add('sel');
+        if(dt<today || dt.getDay()===0) cell.disabled=true;
+        cell.addEventListener('click', function(){
+          sel=dt;
+          hidden.value=dt.getFullYear()+'-'+pad(dt.getMonth()+1)+'-'+pad(dt.getDate());
+          txt.textContent=new Intl.DateTimeFormat(lang(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(dt);
+          close();
+        });
+        grid.appendChild(cell);
+      })(d);
+    }
+    prev.disabled=(view.getFullYear()===today.getFullYear() && view.getMonth()===today.getMonth());
+  }
+  function open(){ panel.hidden=false; btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); render(); }
+  function close(){ panel.hidden=true; btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); if(panel.hidden) open(); else close(); });
+  panel.addEventListener('click', function(e){ e.stopPropagation(); });
+  document.addEventListener('click', function(){ if(!panel.hidden) close(); });
+  prev.addEventListener('click', function(){ view=new Date(view.getFullYear(), view.getMonth()-1, 1); render(); });
+  next.addEventListener('click', function(){ view=new Date(view.getFullYear(), view.getMonth()+1, 1); render(); });
+})();

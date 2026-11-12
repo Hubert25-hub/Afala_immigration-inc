@@ -385,8 +385,15 @@
           <input id="c-mail" type="email" autocomplete="email" placeholder="Adresse courriel">
         </div>
         <div class="field">
-          <label for="c-date">Date souhaitée</label>
-          <input id="c-date" type="date">
+          <label id="c-date-label">Date souhaitée</label>
+          <button type="button" class="date-btn" id="c-date-btn" aria-haspopup="true" aria-expanded="false"><span id="c-date-txt">Choisir une date…</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
+          <input id="c-date" type="hidden">
+          <div class="cal-panel" id="cal-panel" hidden>
+            <div class="cal-head"><button type="button" class="cal-nav" id="cal-prev" aria-label="Mois précédent">‹</button><span class="cal-title" id="cal-title"></span><button type="button" class="cal-nav" id="cal-next" aria-label="Mois suivant">›</button></div>
+            <div class="cal-dow" id="cal-dow"></div>
+            <div class="cal-grid" id="cal-grid"></div>
+            <p class="cal-note">Ouvert du lundi au samedi.</p>
+          </div>
         </div>
         <div class="field">
           <label for="c-moment">Heure souhaitée</label>
