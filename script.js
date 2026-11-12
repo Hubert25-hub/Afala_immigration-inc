@@ -573,6 +573,7 @@ document.addEventListener('DOMContentLoaded', function(){
           sel=dt;
           hidden.value=dt.getFullYear()+'-'+pad(dt.getMonth()+1)+'-'+pad(dt.getDate());
           txt.textContent=new Intl.DateTimeFormat(lang(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(dt);
+          if(window.__afalaHeures) window.__afalaHeures();
           close();
         });
         grid.appendChild(cell);
@@ -587,4 +588,30 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('click', function(){ if(!panel.hidden) close(); });
   prev.addEventListener('click', function(){ view=new Date(view.getFullYear(), view.getMonth()-1, 1); render(); });
   next.addEventListener('click', function(){ view=new Date(view.getFullYear(), view.getMonth()+1, 1); render(); });
+})();
+
+/* Cases d heures : selection et blocage des heures passees du jour meme */
+(function(){
+  var grid=document.getElementById('heure-grid'); if(!grid) return;
+  var hidden=document.getElementById('c-moment');
+  var cases=grid.querySelectorAll('.heure-case');
+  cases.forEach(function(b){
+    b.addEventListener('click', function(){
+      cases.forEach(function(x){ x.classList.remove('sel'); });
+      b.classList.add('sel');
+      hidden.value=b.getAttribute('data-h');
+    });
+  });
+  window.__afalaHeures=function(){
+    var dv=document.getElementById('c-date').value; if(!dv) return;
+    var now=new Date();
+    var pad=function(n){ return String(n).padStart(2,'0'); };
+    var isToday = dv === (now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate()));
+    cases.forEach(function(b){
+      var h=parseInt(b.getAttribute('data-h'), 10);
+      var dis = isToday && h <= now.getHours();
+      b.disabled = dis;
+      if(dis && b.classList.contains('sel')){ b.classList.remove('sel'); hidden.value=''; }
+    });
+  };
 })();

@@ -396,19 +396,19 @@
           </div>
         </div>
         <div class="field">
-          <label for="c-moment">Heure souhaitée</label>
-          <select id="c-moment">
-            <option value="">Choisir…</option>
-            <option value="9 h 00">9 h 00</option>
-            <option value="10 h 00">10 h 00</option>
-            <option value="11 h 00">11 h 00</option>
-            <option value="12 h 00">12 h 00</option>
-            <option value="13 h 00">13 h 00</option>
-            <option value="14 h 00">14 h 00</option>
-            <option value="15 h 00">15 h 00</option>
-            <option value="16 h 00">16 h 00</option>
-            <option value="17 h 00">17 h 00</option>
-          </select>
+          <label id="c-moment-label">Heure souhaitée</label>
+          <div class="heure-grid" id="heure-grid" role="group" aria-label="Heure souhaitée">
+            <button type="button" class="heure-case" data-h="9 h 00">9 h 00</button>
+            <button type="button" class="heure-case" data-h="10 h 00">10 h 00</button>
+            <button type="button" class="heure-case" data-h="11 h 00">11 h 00</button>
+            <button type="button" class="heure-case" data-h="12 h 00">12 h 00</button>
+            <button type="button" class="heure-case" data-h="13 h 00">13 h 00</button>
+            <button type="button" class="heure-case" data-h="14 h 00">14 h 00</button>
+            <button type="button" class="heure-case" data-h="15 h 00">15 h 00</button>
+            <button type="button" class="heure-case" data-h="16 h 00">16 h 00</button>
+            <button type="button" class="heure-case" data-h="17 h 00">17 h 00</button>
+          </div>
+          <input id="c-moment" type="hidden">
         </div>
         <div class="field">
           <label for="c-msg">Votre message (optionnel)</label>
