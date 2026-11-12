@@ -216,7 +216,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "Consultation sur rendez-vous seulement.": "Consultations by appointment only.",
 "Accréditation :": "Accreditation:",
 "Envoi de votre message au cabinet…": "Sending your message to the firm…",
-"Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 à 48 h.": "Thank you! Your message has been sent. The firm will reply within 24 to 48 hours.",
+"Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 h.": "Thank you! Your message has been sent. The firm will reply within 24 hours.",
 "L'envoi a échoué. Écrivez directement à info@afalaimmigration.ca ou appelez le +1 418 509 8246.": "Sending failed. Please email info@afalaimmigration.ca directly or call +1 418 509 8246.",
 "Il manque des informations :": "Some information is missing:",
 "Cabinet d’immigration canadien": "Canadian immigration firm",
@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function(){
       body: JSON.stringify(payload)
     }).then(function(r){
       if(!r.ok) throw new Error('send');
-      result.textContent = T('Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 à 48 h.');
+      result.textContent = T('Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 h.');
       form.reset();
     }).catch(function(){
       result.textContent = T("L'envoi a échoué. Écrivez directement à info@afalaimmigration.ca ou appelez le +1 418 509 8246.");
