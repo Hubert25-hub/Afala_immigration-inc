@@ -487,3 +487,12 @@ footer h4{letter-spacing:.05em}
 /* Bouton envoi WhatsApp (formulaire de contact) */
 .btn-wa{background:#fff;color:#14181D;border:1.5px solid #14181D;margin-top:10px}
 .btn-wa:hover{border-color:var(--red);color:var(--red)}
+
+/* Coordonnees en icones */
+.coord-list{display:grid;gap:4px;margin-top:4px}
+.coord-row{display:flex;align-items:center;gap:12px;padding:7px 8px;border-radius:10px;text-decoration:none;color:var(--ink)}
+a.coord-row:hover{background:#F7F7F3}
+.coord-ic{width:38px;height:38px;flex:none;display:grid;place-items:center;background:#FDECEC;border-radius:10px;color:var(--red)}
+.coord-ic svg{display:block}
+.coord-val{font-weight:800;font-size:16.5px}
+.coord-tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);text-align:right;flex:none}
