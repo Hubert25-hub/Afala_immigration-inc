@@ -483,3 +483,7 @@ footer h4{letter-spacing:.05em}
 .heure-case.sel{background:var(--red);border-color:var(--red);color:#fff}
 .heure-case:disabled{color:#B9B9B2;background:#FAFAF7;cursor:default}
 .heure-case:disabled:hover{border-color:var(--line)}
+
+/* Bouton envoi WhatsApp (formulaire de contact) */
+.btn-wa{background:#fff;color:#14181D;border:1.5px solid #14181D;margin-top:10px}
+.btn-wa:hover{border-color:var(--red);color:var(--red)}
