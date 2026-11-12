@@ -448,3 +448,9 @@ footer h4{letter-spacing:.05em}
 /* Portrait sans cadre ni ombre (demande du cabinet) */
 .about-photo.has-img{box-shadow:none}
 .about-photo.has-img::before,.about-photo.has-img::after{display:none}
+/* Section combinee : Nous contacter | Admissibilite et contact */
+.combo-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:start}
+.combo-consult{margin-top:46px}
+.combo-consult .consult-grid{margin:24px 0 26px}
+.combo-note{color:var(--muted);font-size:13.5px;margin:12px 0 0}
+@media(max-width:900px){.combo-grid{grid-template-columns:1fr}}
