@@ -220,7 +220,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "L'envoi a échoué. Écris directement à info@afalaimmigration.ca ou appelle le +1 581 525 6184.": "Sending failed. Please email info@afalaimmigration.ca directly or call +1 581 525 6184.",
 "Il manque des informations :": "Some information is missing:",
 "Cabinet d’immigration canadien": "Canadian immigration firm",
-    "Pourquoi nous contacter": "Why contact us",
+    "Pourquoi nous choisir": "Why choose us",
     "Six raisons de confier votre projet au cabinet": "Six reasons to entrust your project to the firm",
     "Un consultant réglementé et vérifiable": "A regulated, verifiable consultant",
     "Dr Tamkpanka Tamtare, consultant réglementé CRIC-CISR n° R1056148 et membre du Collège des consultants en immigration et en citoyenneté. Son statut se vérifie au registre public du Collège.": "Dr Tamkpanka Tamtare, regulated consultant RCIC-IRB No. R1056148 and a member of the College of Immigration and Citizenship Consultants. His status can be checked in the College's public register.",
