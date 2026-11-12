@@ -204,7 +204,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "Depuis Rimouski, au Québec, j’accompagne des candidats du Canada et de l’international dans leurs démarches d’immigration canadienne, en français ou en anglais. J’offre un service professionnel fondé sur la rigueur, l’honnêteté, la transparence et l’éthique.": "From Rimouski, Quebec, I support candidates from Canada and around the world with their Canadian immigration applications, in French or in English. I offer a professional service founded on rigour, honesty, transparency and ethics.",
 "Je comprends les difficultés que vous rencontrez dans vos démarches d’immigration. Avec toutes mes compétences acquises, mon rôle est de clarifier et de sécuriser vos démarches, afin que vous puissiez avancer en toute tranquillité, sans stress et en toute confiance. Avec une analyse approfondie et personnalisée de votre dossier, je suis capable d’anticiper les obstacles et de vous guider avec honnêteté dans un contexte propre à votre réalité.": "I understand the difficulties you face in your immigration process. With all the skills I have acquired, my role is to clarify and secure your process, so that you can move forward with peace of mind, without stress and with complete confidence. With a thorough and personalized analysis of your file, I am able to anticipate obstacles and guide you honestly, in a context shaped by your own reality.",
 "Un projet d’immigration est un projet de vie qui mérite du sérieux et de la rigueur. Et c’est avec professionnalisme, rigueur, honnêteté, transparence, respect et humanité que je m’engage à vous accompagner afin de réaliser votre projet canadien. N’hésitez pas à me contacter.": "An immigration project is a life project that deserves seriousness and rigour. And it is with professionalism, rigour, honesty, transparency, respect and humanity that I commit myself to supporting you in making your Canadian project a reality. Please do not hesitate to contact me.",
-"Écris-nous ou joins le cabinet directement": "Write to us or reach the firm directly",
+"Écrivez-nous ou joignez le cabinet directement": "Write to us or reach the firm directly",
 "Coordonnées": "Contact details",
 "Formulaire de contact": "Contact form",
 "Sujet de votre message": "Subject of your message",
@@ -217,7 +217,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "Accréditation :": "Accreditation:",
 "Envoi de votre message au cabinet…": "Sending your message to the firm…",
 "Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 à 48 h.": "Thank you! Your message has been sent. The firm will reply within 24 to 48 hours.",
-"L'envoi a échoué. Écris directement à info@afalaimmigration.ca ou appelle le +1 581 525 6184.": "Sending failed. Please email info@afalaimmigration.ca directly or call +1 581 525 6184.",
+"L'envoi a échoué. Écrivez directement à info@afalaimmigration.ca ou appelez le +1 581 525 6184.": "Sending failed. Please email info@afalaimmigration.ca directly or call +1 581 525 6184.",
 "Il manque des informations :": "Some information is missing:",
 "Cabinet d’immigration canadien": "Canadian immigration firm",
     "Pourquoi nous choisir": "Why choose us",
@@ -493,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function(){
       result.textContent = T('Merci ! Votre message est bien envoyé. Le cabinet vous répond sous 24 à 48 h.');
       form.reset();
     }).catch(function(){
-      result.textContent = T("L'envoi a échoué. Écris directement à info@afalaimmigration.ca ou appelle le +1 581 525 6184.");
+      result.textContent = T("L'envoi a échoué. Écrivez directement à info@afalaimmigration.ca ou appelez le +1 581 525 6184.");
     });
   });
 })();
