@@ -450,8 +450,10 @@
             <textarea id="k-msg" rows="5" placeholder="Décrivez votre projet en quelques mots" required></textarea>
           </div>
           <label class="consent"><input type="checkbox" id="k-consent" required> J'accepte que mes données soient traitées de manière confidentielle.</label>
-          <button class="btn btn-red" type="submit">Envoyer le message</button>
-          <button class="btn btn-wa" type="button" id="k-wa">Envoyer par WhatsApp</button>
+          <div class="send-choices">
+            <button class="btn btn-red" type="submit">Envoyer par courriel</button>
+            <button class="btn btn-wa" type="button" id="k-wa">Envoyer par WhatsApp</button>
+          </div>
           <p class="form-note">Réponse sous 24 à 48 h. Pour une consultation, utilisez plutôt la prise de rendez-vous.</p>
           <div class="form-result" id="contactResult" role="status" aria-live="polite"></div>
         </form></div>
