@@ -68,7 +68,7 @@ var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
       champsTest.forEach(function(c){ if(!v(c[0])) manquants.push(c[1]); });
       [['e-tel','votre téléphone ou WhatsApp'],['e-mail','votre courriel']].forEach(function(c){ if(!v(c[0])) manquants.push(c[1]); });
       if(manquants.length){ erreur(manquants); return; }
-      box.className = 'form-result';
+      box.className = 'form-result show';
       box.textContent = AFALA_T('Envoi de votre demande au cabinet…');
       var donnees = {
         _subject: 'Formulaire de contact : vérification d’admissibilité, site AFALA',
@@ -133,7 +133,7 @@ var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
         box.scrollIntoView({behavior:'smooth', block:'center'});
         return;
       }
-      box.className = 'form-result';
+      box.className = 'form-result show';
       box.textContent = AFALA_T('Envoi de votre demande au cabinet…');
       var donnees = {
         _subject: 'Prise de rendez-vous en ligne : consultation, site AFALA',

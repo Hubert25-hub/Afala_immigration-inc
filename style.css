@@ -201,7 +201,7 @@ footer .wordmark img.brand-logo{height:50px}
 .test-card .btn{width:100%;margin-top:6px}.test-card .btn{white-space:normal;line-height:1.35}@media(max-width:560px){.test-card .btn{font-size:14px;padding-left:14px;padding-right:14px}}
 .form-note{font-size:12.5px;color:var(--muted);text-align:center;margin:12px 0 0}
 .form-result{display:none;margin-top:18px;background:#EFFAF2;border:1.5px solid #BFE9CF;border-radius:12px;padding:16px 18px;font-size:14.5px}
-.form-result.show{display:block}
+.form-result.show{display:block}.form-result.success,.form-result.error,.form-result:not(:empty){display:block}.form-result.error{background:#FDECEC;border-color:#F5B8BA}
 .form-result b{color:var(--wa-dark)}
 .form-result ul{margin:8px 0 0;padding-left:18px;color:var(--ink-2)}
 
