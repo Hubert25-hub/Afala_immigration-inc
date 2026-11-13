@@ -198,7 +198,7 @@ footer .wordmark img.brand-logo{height:50px}
 .field select,.field input{width:100%;font:inherit;font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);appearance:none}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2314181D' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .field select:focus,.field input:focus{outline:2px solid var(--red);outline-offset:1px;border-color:var(--red)}
-.test-card .btn{width:100%;margin-top:6px}
+.test-card .btn{width:100%;margin-top:6px}.test-card .btn{white-space:normal;line-height:1.35}@media(max-width:560px){.test-card .btn{font-size:14px;padding-left:14px;padding-right:14px}}
 .form-note{font-size:12.5px;color:var(--muted);text-align:center;margin:12px 0 0}
 .form-result{display:none;margin-top:18px;background:#EFFAF2;border:1.5px solid #BFE9CF;border-radius:12px;padding:16px 18px;font-size:14.5px}
 .form-result.show{display:block}
