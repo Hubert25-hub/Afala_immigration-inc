@@ -494,7 +494,7 @@ footer h4{letter-spacing:.05em}
 a.coord-row:hover{background:#F7F7F3}
 .coord-ics{display:flex;gap:8px;width:88px;flex:none}
 .coord-ic{width:38px;height:38px;flex:none;display:grid;place-items:center;background:#FDECEC;border-radius:10px;color:var(--red)}
-.coord-ic svg{display:block}
+.coord-ic svg{display:block}a.coord-ic{text-decoration:none}a.coord-main{text-decoration:none;color:var(--ink)}
 .coord-val{font-weight:800;font-size:16.5px}
 .coord-main{display:flex;flex-direction:column;gap:1px;min-width:0}
 .coord-val{white-space:nowrap}
