@@ -505,3 +505,5 @@ a.coord-row:hover{background:#F7F7F3}
 .send-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .send-choices .btn{width:100%;justify-content:center;margin-top:0}
 @media(max-width:560px){.send-choices{grid-template-columns:1fr}}
+
+.rdv-box{max-width:780px;margin:0 auto}

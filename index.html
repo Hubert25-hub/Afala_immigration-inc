@@ -36,7 +36,7 @@
       <a href="#processus">Processus</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <a href="#rendez-vous">Rendez-vous</a>
+      <a href="#rendez-vous">Prendre rendez-vous en ligne</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" class="active">FR</button><button type="button" data-lang="en">EN</button></div>
     <button class="burger" id="menuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
@@ -49,7 +49,7 @@
       <a href="#processus">Processus</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <a href="#rendez-vous">Prendre rendez-vous</a>
+      <a href="#rendez-vous">Prendre rendez-vous en ligne</a>
     </div>
   </div>
 </header>
@@ -73,7 +73,7 @@
         <p class="hero-insigne-sub">Étudier, travailler, visiter ou s'installer au Canada : on monte votre dossier en français ou en anglais, avec un plan clair, de façon rigoureuse et dans la transparence.</p>
       </div>
       <div class="hero-ctas">
-        <a class="btn btn-red" href="#rendez-vous">Prendre rendez-vous
+        <a class="btn btn-red" href="#rendez-vous">Prendre rendez-vous en ligne
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
         <a class="btn btn-outline" href="#services">Découvrir nos services</a>
@@ -299,29 +299,32 @@
           <div class="combo-consult">
             <h2 class="consult-titre">Consultation initiale</h2>
       <p class="consult-sub">Des conseils stratégiques</p>
-      <p class="consult-txt">Recevez des conseils d’experts pour votre immigration au Canada, adaptés à votre situation et à votre budget. Tout commence par le questionnaire d’admissibilité, rempli sur le site dans le même formulaire que votre réservation. La consultation approfondie vient ensuite : votre profil est analysé en détail, vos questions reçoivent des réponses claires, et la stratégie de votre dossier est définie avant de passer à l’action.</p>
+      <p class="consult-txt">Recevez des conseils d’experts pour votre immigration au Canada, adaptés à votre situation et à votre budget. Tout commence par le questionnaire d’admissibilité, rempli sur le site en quelques minutes. La consultation approfondie vient ensuite : votre profil est analysé en détail, vos questions reçoivent des réponses claires, et la stratégie de votre dossier est définie avant de passer à l’action.</p>
       <div class="consult-grid">
         <div class="consult-card"><span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span><h3>Consultation approfondie</h3><p><span class="prix">Payante · 1 h · 125 $.</span> Le paiement se fait en ligne par Stripe, et le cabinet vous confirme votre rendez-vous après le paiement.</p></div>
       </div>
-      <a class="btn btn-red" href="#rendez-vous">Réserver ma consultation</a>
+      <a class="btn btn-red" href="#rendez-vous">Prendre rendez-vous en ligne</a>
             <p class="combo-note">Paiement sécurisé par Stripe.</p>
           </div>
         </div>
         <div class="combo-col" id="test">
-          <h2>Admissibilité et contact</h2>
-          <h3 class="sec-sub">Deux étapes, <span class="red">un seul formulaire</span></h3>
-          <p>Répondez aux 7 questions d’admissibilité, puis réservez votre consultation dans la foulée. Le cabinet reçoit tout en même temps : votre questionnaire et votre demande de rendez-vous, et il vous confirme après le paiement.</p>
-        <ul class="test-points">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Questionnaires et prise de rendez-vous reçus ensemble par le cabinet</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Paiement en ligne sécurisé par Stripe</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Réponse d'AFALA IMMIGRATION INC sous 24 h ouvrables</li>
-        </ul>
-          <div id="rendez-vous" style="scroll-margin-top:96px">
+          <h2>Contact et vérification d’admissibilité</h2>
       <form class="test-card consult-form" id="parcoursForm" novalidate>
-        <h3>Commencez votre parcours</h3>
-        <p class="etape">Étape 1 · Votre admissibilité</p>
+        <h3>Formulaire de contact</h3>
+<div class="field">
+          <label for="e-nom">Votre nom complet</label>
+          <input id="e-nom" type="text" autocomplete="name" placeholder="Prénom et nom">
+        </div>
         <div class="field">
-          <label for="f-prog">1 · Quel service visez-vous ?</label>
+          <label for="f-age">1 · Votre âge</label>
+          <select id="f-age" required>
+            <option value="">Choisir…</option>
+            <option value="18 à 25 ans">18 à 25 ans</option><option value="26 à 32 ans">26 à 32 ans</option>
+            <option value="33 à 40 ans">33 à 40 ans</option><option value="41 ans et plus">41 ans et plus</option>
+          </select>
+        </div>
+                <div class="field">
+          <label for="f-prog">2 · Quel service visez-vous ?</label>
           <select id="f-prog" required>
             <option value="">Choisir…</option>
             <option value="Permis d'études">Permis d'études</option>
@@ -340,7 +343,7 @@
           </select>
         </div>
         <div class="field">
-          <label for="f-edu">2 · Votre niveau d'études le plus élevé</label>
+          <label for="f-edu">3 · Votre niveau d'études le plus élevé</label>
           <select id="f-edu" required>
             <option value="">Choisir…</option>
             <option value="Secondaire / Baccalauréat">Secondaire / Baccalauréat</option><option value="Formation professionnelle / BTS">Formation professionnelle / BTS</option>
@@ -348,7 +351,7 @@
           </select>
         </div>
         <div class="field">
-          <label for="f-lang">3 · Quelles langues parlez-vous ?</label>
+          <label for="f-lang">4 · Quelles langues parlez-vous ?</label>
           <select id="f-lang" required>
             <option value="">Choisir…</option>
             <option value="Français seulement">Français seulement</option><option value="Anglais seulement">Anglais seulement</option>
@@ -356,7 +359,7 @@
           </select>
         </div>
         <div class="field">
-          <label for="f-exp">4 · Votre expérience de travail</label>
+          <label for="f-exp">5 · Votre expérience de travail</label>
           <select id="f-exp" required>
             <option value="">Choisir…</option>
             <option value="Aucune pour le moment">Aucune pour le moment</option><option value="Moins d'un an">Moins d'un an</option>
@@ -364,14 +367,6 @@
           </select>
         </div>
         <div class="field">
-          <label for="f-age">5 · Votre âge</label>
-          <select id="f-age" required>
-            <option value="">Choisir…</option>
-            <option value="18 à 25 ans">18 à 25 ans</option><option value="26 à 32 ans">26 à 32 ans</option>
-            <option value="33 à 40 ans">33 à 40 ans</option><option value="41 ans et plus">41 ans et plus</option>
-          </select>
-        </div>
-                <div class="field">
           <label for="f-residence">6 · Votre pays de résidence actuel</label>
           <input id="f-residence" type="text" autocomplete="country-name" placeholder="Ex. : Canada" required>
         </div>
@@ -379,9 +374,39 @@
           <label for="f-citoyennete">7 · Votre pays de citoyenneté</label>
           <input id="f-citoyennete" type="text" placeholder="Ex. : Togo" required>
         </div>
-        <p class="etape">Étape 2 · Votre prise de rendez-vous</p>
-        <p class="duree-note">La consultation dure 1 h et coûte 125 $, payables en ligne par Stripe.</p>
         <div class="field">
+          <label for="e-tel">Votre téléphone ou WhatsApp</label>
+          <input id="e-tel" type="tel" autocomplete="tel" placeholder="Numéro pour vous joindre">
+        </div>
+        <div class="field">
+          <label for="e-mail">Votre courriel</label>
+          <input id="e-mail" type="email" autocomplete="email" placeholder="Adresse courriel">
+        </div>
+        <div class="field">
+          <label for="e-msg">Votre message (optionnel)</label>
+          <textarea id="e-msg" rows="3" placeholder="Décrivez votre projet en quelques mots"></textarea>
+        </div>
+        <div class="send-choices">
+          <button class="btn btn-red" type="submit">Envoyer par courriel</button>
+          <button class="btn btn-wa" type="button" id="e-wa">Envoyer par WhatsApp</button>
+        </div>
+        <p class="form-note">Vos réponses partent directement au cabinet, par courriel ou par WhatsApp. Aucun paiement n’est demandé à cette étape.</p>
+        <div class="form-result" id="parcoursResult" role="status" aria-live="polite"></div>
+      </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- rendez-vous -->
+  <section id="rendez-vous" style="scroll-margin-top:96px">
+    <div class="wrap">
+      <div class="rdv-box">
+      <h2>Prendre rendez-vous en ligne</h2>
+            <form class="test-card consult-form" id="resaForm" novalidate>
+        <h3>Formulaire de prise de rendez-vous</h3>
+        <p class="duree-note">La consultation dure 1 h et coûte 125 $, payables en ligne par Stripe.</p>
+<div class="field">
           <label for="c-nom">Votre nom complet</label>
           <input id="c-nom" type="text" autocomplete="name" placeholder="Prénom et nom">
         </div>
@@ -423,42 +448,10 @@
           <label for="c-msg">Votre message (optionnel)</label>
           <textarea id="c-msg" rows="3" placeholder="Décrivez votre projet en quelques mots"></textarea>
         </div>
-                <button class="btn btn-red" type="submit">Envoyer et passer au paiement</button>
-        <p class="form-note">Paiement sécurisé par Stripe. Le cabinet reçoit votre questionnaire et votre demande, puis vous confirme votre rendez-vous après le paiement.</p>
-        <div class="form-result" id="parcoursResult" role="status" aria-live="polite"></div>
+        <button class="btn btn-red" type="submit">Envoyer le formulaire et passer au paiement</button>
+        <p class="form-note">Paiement sécurisé par Stripe. Le cabinet vous confirme votre rendez-vous après le paiement.</p>
+        <div class="form-result" id="resaResult" role="status" aria-live="polite"></div>
       </form>
-     
-          <div style="margin-top:22px"><form class="c-card pform" id="contactForm" novalidate>
-          <h3>Contact</h3>
-          <div class="field">
-            <label for="k-nom">Votre nom complet *</label>
-            <input id="k-nom" type="text" autocomplete="name" placeholder="Prénom et nom" required>
-          </div>
-          <div class="field">
-            <label for="k-tel">Votre téléphone ou WhatsApp *</label>
-            <input id="k-tel" type="tel" autocomplete="tel" placeholder="Numéro pour vous joindre" required>
-          </div>
-          <div class="field">
-            <label for="k-mail">Votre courriel *</label>
-            <input id="k-mail" type="email" autocomplete="email" placeholder="Adresse courriel" required>
-          </div>
-          <div class="field">
-            <label for="k-sujet">Sujet de votre message</label>
-            <input id="k-sujet" type="text" placeholder="De quoi s'agit-il ?">
-          </div>
-          <div class="field">
-            <label for="k-msg">Votre message *</label>
-            <textarea id="k-msg" rows="5" placeholder="Décrivez votre projet en quelques mots" required></textarea>
-          </div>
-          <label class="consent"><input type="checkbox" id="k-consent" required> J'accepte que mes données soient traitées de manière confidentielle.</label>
-          <div class="send-choices">
-            <button class="btn btn-red" type="submit">Envoyer par courriel</button>
-            <button class="btn btn-wa" type="button" id="k-wa">Envoyer par WhatsApp</button>
-          </div>
-          <p class="form-note">Réponse sous 24 h. Pour une consultation, utilisez plutôt la prise de rendez-vous.</p>
-          <div class="form-result" id="contactResult" role="status" aria-live="polite"></div>
-        </form></div>
-        </div>
       </div>
     </div>
   </section>
@@ -540,7 +533,7 @@
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">Combien coûte l'accompagnement ?
             <span class="chev"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E11B22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
-          <div class="faq-a"><p>Le questionnaire d’admissibilité se remplit directement sur le site, dans le même formulaire que la réservation de votre consultation. La consultation approfondie est payante et dure 1 h : le cabinet vous confirme le tarif avant de commencer, sans surprise. Le tarif de l’accompagnement dépend ensuite du service choisi et de la complexité du dossier. Les frais gouvernementaux restent distincts et payés directement aux autorités.</p></div>
+          <div class="faq-a"><p>Le questionnaire d’admissibilité se remplit directement sur le site, et la réservation de votre consultation se fait séparément, dans la section rendez-vous. La consultation approfondie est payante, dure 1 h et coûte 125 $, payables en ligne par Stripe. Le tarif de l’accompagnement dépend ensuite du service choisi et de la complexité du dossier. Les frais gouvernementaux restent distincts et payés directement aux autorités.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" type="button" aria-expanded="false">Et si ma demande est refusée ?
@@ -574,7 +567,7 @@
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn btn-white" href="#test">Faire le test d’admissibilité</a>
-        <a class="btn btn-white" href="#rendez-vous">Prendre rendez-vous</a>
+        <a class="btn btn-white" href="#rendez-vous">Prendre rendez-vous en ligne</a>
         <a class="btn" href="https://wa.me/14185098246?text=Bonjour%2C%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20services%20d%27immigration." target="_blank" rel="noopener" style="background:transparent;border-color:#fff;color:#fff">WhatsApp : +1 418 509 8246</a>
       </div>
     </div>
@@ -600,7 +593,7 @@
           <li><a href="#processus">Processus</a></li>
           <li><a href="#test">Test d'admissibilité</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#rendez-vous">Prendre rendez-vous</a></li>
+          <li><a href="#rendez-vous">Prendre rendez-vous en ligne</a></li>
         </ul>
       </div>
       <div>
