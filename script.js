@@ -73,6 +73,7 @@ var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
       var donnees = {
         _subject: 'Formulaire de contact : vérification d’admissibilité, site AFALA',
         _template: 'table',
+        _honey: v('e-honey'),
         Nom: v('e-nom'), 'Âge': v('f-age'),
         'Service visé': v('f-prog'), "Niveau d'études": v('f-edu'), 'Langues parlées': v('f-lang'),
         'Expérience de travail': v('f-exp'), 'Pays de résidence actuel': v('f-residence'), 'Pays de citoyenneté': v('f-citoyennete'),
@@ -138,6 +139,7 @@ var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
       var donnees = {
         _subject: 'Prise de rendez-vous en ligne : consultation, site AFALA',
         _template: 'table',
+        _honey: v('c-honey'),
         Nom: v('c-nom'), 'Téléphone ou WhatsApp': v('c-tel'), Courriel: v('c-mail'),
         'Date souhaitée': dateFr(v('c-date')), 'Heure souhaitée': v('c-moment'),
         Message: v('c-msg') || 'Aucun'
