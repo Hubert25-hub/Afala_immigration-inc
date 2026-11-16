@@ -49,7 +49,7 @@
     function fermer(){if(s){s.style.opacity='0';s.style.visibility='hidden';setTimeout(function(){if(s)s.remove()},480);s=null}}
     s.addEventListener('click',fermer);setTimeout(fermer,2100);})();
 
-var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
+var LIEN_PAIEMENT_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
   (function(){
     var f = document.getElementById('parcoursForm');
     if(!f) return;
@@ -150,9 +150,9 @@ var LIEN_STRIPE_CONSULTATION = "https://buy.stripe.com/00w5kD9eA7GY0TA5BaeQM00";
         body: JSON.stringify(donnees)
       }).then(function(r){
         if(!r.ok) throw new Error('send');
-        if(LIEN_STRIPE_CONSULTATION){
+        if(LIEN_PAIEMENT_CONSULTATION){
           box.textContent = AFALA_T('Tout est envoyé au cabinet. Redirection vers le paiement sécurisé…');
-          setTimeout(function(){ window.location.href = LIEN_STRIPE_CONSULTATION; }, 900);
+          setTimeout(function(){ window.location.href = LIEN_PAIEMENT_CONSULTATION; }, 900);
         } else {
           box.className = 'form-result success';
           box.textContent = AFALA_T('Merci, votre demande est envoyée au cabinet. Le cabinet vous confirme votre rendez-vous et les modalités de paiement.');
