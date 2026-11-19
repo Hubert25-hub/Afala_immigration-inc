@@ -280,7 +280,7 @@ document.querySelectorAll('[data-wa]').forEach(function(el){
 "J'accepte que mes données soient traitées de manière confidentielle.": "I agree that my information will be handled confidentially.",
 "Envoyer le message": "Send the message",
 "Réponse sous 24 h. Pour une consultation, utilisez plutôt la prise de rendez-vous.": "Reply within 24 hours. For a consultation, please use the appointment booking instead.",
-"Prendre rendez-vous en ligne": "Book an appointment online",
+"Prendre rendez-vous en ligne": "Book an appointment online", "Suivi de dossier": "Case tracking",
 "Consultation sur rendez-vous seulement.": "Consultations by appointment only.",
 "Accréditation :": "Accreditation:",
 "Envoi de votre message au cabinet…": "Sending your message to the firm…",
